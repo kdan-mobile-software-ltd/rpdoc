@@ -8,11 +8,12 @@ module Rpdoc
       :collection_schema
 
     attr_accessor \
+      :rpdoc_enable,
       :postman_apikey,
       :collection_workspace,
       :collection_uid,
       :collection_name,
-      :server_host,
+      :rspec_server_host,
       :rspec_request_allow_headers,
       :rpdoc_root,
       :rpdoc_request_filename,
@@ -22,6 +23,8 @@ module Rpdoc
       :rpdoc_auto_push_strategy
 
     def initialize
+      @rpdoc_enable = true
+
       @postman_host = 'https://api.getpostman.com'
       @postman_collection_endpoint = "#{@postman_host}/collections"
       @postman_apikey = nil
@@ -31,7 +34,7 @@ module Rpdoc
       @collection_name = 'Rpdoc'
       @collection_schema = 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
 
-      @server_host = '{{server_host}}'
+      @rspec_server_host = '{{server_host}}'
       @rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 
       @rpdoc_root = 'rpdoc'
@@ -43,7 +46,7 @@ module Rpdoc
     end
   
     def valid?
-      !@postman_apikey.nil?
+      @rpdoc_enable && @rpdoc_auto_push ? !@postman_apikey.nil? : true
     end
   end
 end

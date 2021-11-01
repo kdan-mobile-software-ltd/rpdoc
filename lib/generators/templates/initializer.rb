@@ -2,8 +2,11 @@
 
 Rpdoc.configure do |config|
 
-  # (Must) Apikey for your Postman account.
-  config.postman_apikey = 'postman_apikey'
+  # (Optional) You can disable rpdoc generation process manually.
+  # config.rpdoc_enable = true
+
+  # (Optional) Apikey for your Postman account, used if need to push.
+  # config.postman_apikey = 'postman_apikey'
 
   # (Optional) Workspace that your collection will be push to. Default your account's personal workspace. 
   # config.collection_workspace = 'collection_workspace'
@@ -15,7 +18,7 @@ Rpdoc.configure do |config|
   # config.collection_name = 'Rpdoc'
   
   # (Optional) Your Rails server API host.
-  # config.server_host = '{{server_host}}'
+  # config.rspec_server_host = '{{server_host}}'
 
   # (Optional) Since Rspec generates many noisy headers, you can filter them.
   # config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']

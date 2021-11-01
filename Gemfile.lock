@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rpdoc (0.1.0)
-      json_requester
+      json_requester (~> 1.0)
 
 GEM
   remote: https://rubygems.org/

@@ -8,13 +8,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["yuntai"]
   spec.email         = ["yuntai.yang@kdanmobile.com"]
 
-  spec.summary       = "https://www.kdanmobile.com"
-  spec.description   = "https://www.kdanmobile.com"
+  spec.summary       = "A gem to transform RSpec examples to Postman collection"
+  spec.description   = "With RSpec examples, it will generate Postman collection and push to the Postman server."
   spec.homepage      = "https://www.kdanmobile.com"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://www.kdanmobile.com"
@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
-  spec.add_dependency 'json_requester'
+  spec.add_dependency 'json_requester', '~> 1.0'
 
   spec.add_development_dependency 'rails', '>= 5.0'
   spec.add_development_dependency 'rspec', '~> 3.0'

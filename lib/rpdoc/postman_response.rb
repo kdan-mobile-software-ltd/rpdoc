@@ -69,8 +69,8 @@ module Rpdoc
         method: @rspec_request.method,
         header: filter_headers,
         url: {
-          raw: "#{@configuration.server_host}#{@rspec_request.path}",
-          host: [@configuration.server_host],
+          raw: "#{@configuration.rspec_server_host}#{@rspec_request.path}",
+          host: [@configuration.rspec_server_host],
           path: @rspec_request.path.split('/'),
           variable: [],
         },
