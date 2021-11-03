@@ -4,7 +4,7 @@ module Rpdoc
   class Configuration
     attr_reader \
       :postman_host,
-      :postman_collection_endpoint,
+      :postman_collection_path,
       :collection_schema
 
     attr_accessor \
@@ -23,10 +23,10 @@ module Rpdoc
       :rpdoc_auto_push_strategy
 
     def initialize
-      @rpdoc_enable = true
+      @rpdoc_enable = ENV['RPDOC_ENABLE'] != 'false'
 
       @postman_host = 'https://api.getpostman.com'
-      @postman_collection_endpoint = "#{@postman_host}/collections"
+      @postman_collection_path = "/collections"
       @postman_apikey = nil
 
       @collection_workspace = nil
@@ -46,7 +46,10 @@ module Rpdoc
     end
   
     def valid?
-      @rpdoc_enable && @rpdoc_auto_push ? !@postman_apikey.nil? : true
+      return true unless @rpdoc_enable && @rpdoc_auto_push
+      return false if @postman_apikey.nil?
+      return false if @rpdoc_auto_push_strategy == :push_and_update && @collection_uid.nil?
+      true
     end
   end
 end

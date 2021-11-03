@@ -5,10 +5,10 @@ Rpdoc.configure do |config|
   # (Optional) You can disable rpdoc generation process manually.
   # config.rpdoc_enable = true
 
-  # (Optional) Apikey for your Postman account, used if need to push.
+  # (Optional) Apikey for your Postman account, used if want to push collection to the Postman server.
   # config.postman_apikey = 'postman_apikey'
 
-  # (Optional) Workspace that your collection will be push to. Default your account's personal workspace. 
+  # (Optional) Workspace that your collection will be pushed to. Default your account's personal workspace.
   # config.collection_workspace = 'collection_workspace'
   
   # (Optional) Your existing collection uid. Will update it when using :push_and_update push strategy.

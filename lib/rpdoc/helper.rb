@@ -2,19 +2,21 @@
 
 RSpec.configure do |config|
   config.before(:suite) do
+    root = Rpdoc.configuration.rpdoc_root
     if Rpdoc.configuration.rpdoc_enable
       raise StandardError.new('Configuration Invalid') unless Rpdoc.configuration.valid?
-      Dir.glob("#{Rpdoc.configuration.rpdoc_root}/**/*.json") do |filename|
+      FileUtils.mkdir_p(root) unless File.exists?(root)
+      Dir.glob("#{root}/**/*.json") do |filename|
         File.delete(filename)
       end
     end
   end
 
   config.after(:suite) do
-    if Rpdoc.configuration.rpdoc_enable && Rpdoc.configuration.rpdoc_auto_push
+    if Rpdoc.configuration.rpdoc_enable
       postman_collection = Rpdoc::PostmanCollection.new
       postman_collection.save
-      postman_collection.send(Rpdoc.configuration.rpdoc_auto_push_strategy)
+      postman_collection.send(Rpdoc.configuration.rpdoc_auto_push_strategy) if Rpdoc.configuration.rpdoc_auto_push
     end
   end
 end

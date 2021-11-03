@@ -4,7 +4,6 @@ require 'rpdoc'
 
 describe Rpdoc::Configuration do
   it 'should be configurable' do
-
     Rpdoc.configure do |config|
       config.postman_apikey = 'postman_apikey'
       config.collection_workspace = 'collection_workspace'

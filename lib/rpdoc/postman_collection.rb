@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
+require 'json_requester'
+
 module Rpdoc
   class PostmanCollection
 
     def initialize
       @configuration = Rpdoc.configuration
-      @requester = JsonRequester.new(Settings.kdan_service.data_center)
+      @requester = JsonRequester.new(@configuration.postman_host)
 
       @data = generated_collection_data
     end
 
     def push_and_create
-      path = "#{@configuration.postman_collection_endpoint}?workspace=#{@configuration.collection_workspace}"
+      path = "#{@configuration.postman_collection_path}?workspace=#{@configuration.collection_workspace}"
       headers = {
         'X-Api-Key': @configuration.postman_apikey
       }
@@ -19,7 +21,7 @@ module Rpdoc
     end
 
     def push_and_update
-      path = "#{@configuration.postman_collection_endpoint}/#{@configuration.collection_uid}"
+      path = "#{@configuration.postman_collection_path}/#{@configuration.collection_uid}"
       headers = {
         'X-Api-Key': @configuration.postman_apikey
       }
