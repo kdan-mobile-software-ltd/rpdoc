@@ -8,17 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["yuntai"]
   spec.email         = ["yuntai.yang@kdanmobile.com"]
 
-  spec.summary       = "A gem to transform RSpec examples to Postman collection"
-  spec.description   = "With RSpec examples, it will generate Postman collection and push to the Postman server."
-  spec.homepage      = "https://www.kdanmobile.com"
+  spec.summary       = "RSpec to Postman Documentation Tool"
+  spec.description   = "Rpdoc is a simple Postman API documentation tool, which transforms RSpec examples to Postman collection."
+  spec.homepage      = "https://github.com/kdan-mobile-software-ltd/rpdoc"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
-
-  # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://www.kdanmobile.com"
-  spec.metadata["changelog_uri"] = "https://www.kdanmobile.com"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

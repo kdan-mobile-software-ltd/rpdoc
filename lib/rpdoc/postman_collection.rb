@@ -88,7 +88,9 @@ module Rpdoc
 
     def merged_by(other_collection_data)
       clean_generated_responses_from(other_collection_data[:collection][:item])
-      insert_generated_responses_into(other_collection_data[:collection][:item])
+
+      other_collection_data[:collection][:info][:description] = @data[:collection][:info][:description]
+      insert_generated_responses_into(other_collection_data[:collection][:item], from_collection_items: @data[:collection][:item])
     end
 
     def clean_generated_responses_from(collection_items)
@@ -103,23 +105,25 @@ module Rpdoc
       end
     end
 
-    def insert_generated_responses_into(collection_items, from_collection_items: nil)
-      from_collection_items ||= @data[:collection][:item]
-
+    def insert_generated_responses_into(collection_items, from_collection_items: [])
       if collection_items.empty?
         collection_items = from_collection_items.deep_dup
       else
+        # transform collection_items into hash, using item[:name] as key
         item_hash = {}
         collection_items.each do |item|
           item_hash[item[:name]] = item
         end
 
+        # insert generated responses and replace description into corresponding items based on item[:name]
         from_collection_items.each do |from_item|
           from_item_name = from_item[:name]
           if item_hash.has_key?(from_item_name)
             if from_item.has_key?(:item) && item_hash[from_item_name].has_key?(:item)
+              item_hash[from_item_name][:description] = from_item[:description]
               insert_generated_responses_into(item_hash[from_item_name][:item], from_collection_items: from_item[:item])
             elsif from_item.has_key?(:response) && item_hash[from_item_name].has_key?(:response)
+              item_hash[from_item_name][:request][:description] = from_item[:request][:description]
               item_hash[from_item_name][:response] += from_item[:response].deep_dup
             else
               collection_items << from_item.deep_dup

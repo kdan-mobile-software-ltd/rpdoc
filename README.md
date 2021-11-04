@@ -21,9 +21,7 @@ And then install the gem:
 $ bundle install
 ```
 
-## Usage
-
-### Configuration
+## Configuration
 
 `Rpdoc` should be configured manually if you want to automatically push your collection to the Postman server.
 
@@ -79,7 +77,7 @@ Rpdoc.configure do |config|
 end
 ```
 
-### Usage
+## Usage
 
 `Rpdoc` only supports RSpec examples with [request](https://relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec) type.
 
