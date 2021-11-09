@@ -1,3 +1,6 @@
+## [0.1.3] - 2021-11-09
+- Add require 'rspec/rails' if RSpec::Rails exists
+
 ## [0.1.2] - 2021-11-04
 - Add gem description
 - Remove unecessary gem dependency

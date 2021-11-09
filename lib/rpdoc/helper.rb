@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'rspec/rails' if defined?(RSpec::Rails)
 
 RSpec.configure do |config|
   config.before(:suite) do
