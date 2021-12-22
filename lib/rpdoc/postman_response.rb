@@ -45,7 +45,7 @@ module Rpdoc
         code: @rspec_response.code.to_i,
         _postman_previewlanguage: "json",
         header: headers,
-        body: JSON.pretty_generate(JSON.parse(@rspec_response.body))
+        body: JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
       }
     end
 
@@ -72,7 +72,7 @@ module Rpdoc
           raw: "#{@configuration.rspec_server_host}#{@rspec_request.path}",
           host: [@configuration.rspec_server_host],
           path: @rspec_request.path.split('/'),
-          variable: [],
+          query: @rspec_request.query_parameters.map { |key, value| { key: key, value: value } }
         },
         body: nil
       }

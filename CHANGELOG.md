@@ -1,3 +1,6 @@
+## [0.1.4] - 2021-12-22
+- Fix rspec parsing bugs
+
 ## [0.1.3] - 2021-11-09
 - Add require 'rspec/rails' if RSpec::Rails exists
 
