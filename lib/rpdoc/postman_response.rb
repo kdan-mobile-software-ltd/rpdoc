@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'cgi'
+
 module Rpdoc
   class PostmanResponse
     attr_reader :data
@@ -71,7 +73,7 @@ module Rpdoc
         key, value = string.split('=')
         {
           key: key,
-          value: value,
+          value: CGI.unescape(value),
           text: 'text'
         }
       end
