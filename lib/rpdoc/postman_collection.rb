@@ -40,10 +40,6 @@ module Rpdoc
 
     private
 
-    def collection_data
-      @collection_data ||= @original_collection.present? ? @original_collection.deeper_merge(collection_from_rspec, merge_hash_arrays: true) : collection_from_rspec
-    end
-
     def generated_collection_data
       {
         collection: {
