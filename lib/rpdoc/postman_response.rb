@@ -38,15 +38,17 @@ module Rpdoc
     def response_data
       headers = @rspec_response.header.map { |key, value| {key: key, value: value} }
       headers << rspec_location_header
-      {
+      data = {
         name: @rspec_example.metadata[:rpdoc_example_name],
         originalRequest: original_request_data,
         status: @rspec_response.status.to_s,
         code: @rspec_response.code.to_i,
         _postman_previewlanguage: "json",
         header: headers,
-        body: JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
+        body: nil
       }
+      data[:body] = JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil if @rspec_response.headers['Content-Type'].include?('application/json')
+      data
     end
 
     def rspec_location_header
@@ -65,6 +67,14 @@ module Rpdoc
           value: @rspec_request.headers[header]
         }
       end.compact
+      query_string = @rspec_request.query_string.split('&').map do |string|
+        key, value = string.split('=')
+        {
+          key: key,
+          value: value,
+          text: 'text'
+        }
+      end
       @original_request_data = {
         method: @rspec_request.method,
         header: filter_headers,
@@ -72,7 +82,7 @@ module Rpdoc
           raw: "#{@configuration.rspec_server_host}#{@rspec_request.path}",
           host: [@configuration.rspec_server_host],
           path: @rspec_request.path.split('/'),
-          query: @rspec_request.query_parameters.map { |key, value| { key: key, value: value } }
+          query: query_string
         },
         body: nil
       }
