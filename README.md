@@ -12,7 +12,7 @@
 Add `rpdoc` to your application's `Gemfile`:
 
 ```ruby
-gem 'rpdoc', '~> 0.1.2'
+gem 'rpdoc'
 ```
 
 And then install the gem:
