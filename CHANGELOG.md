@@ -1,3 +1,6 @@
+## [0.1.6] - 2022-02-14
+- Update licnese
+
 ## [0.1.4, 0.1.5] - 2021-12-22
 - Fix rspec parsing bugs
 
