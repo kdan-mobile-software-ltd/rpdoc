@@ -51,7 +51,8 @@ module Rpdoc
       if @rspec_response.headers['Content-Type'].include?('application/json')
         data[:body] = JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
       else
-        data[:body] = @rspec_response.body
+        body = @rspec_response.body
+        data[:body] = body.encoding == 'ASCII-8BIT' ? body.force_encoding("ISO-8859-1").encode("UTF-8") : body
       end
       data
     end

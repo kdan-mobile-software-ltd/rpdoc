@@ -1,3 +1,5 @@
+## [0.1.7] - 2022-02-14
+- Fix rspec parse zip response bug
 ## [0.1.6] - 2022-02-14
 - Update licnese
 
