@@ -96,14 +96,14 @@ module Rpdoc
     end
 
     def original_request_data_body
-      if @rspec_request.headers['RAW_POST_DATA'].present? || @rspec_request.headers['Content-Type'] == 'application/json'
-        data = JSON.pretty_generate(JSON.parse(@rspec_request.headers['RAW_POST_DATA'])) rescue nil
+      if @rspec_request.headers['RAW_POST_DATA'].present?
+        json_body = JSON.pretty_generate(JSON.parse(@rspec_request.headers['RAW_POST_DATA'])) rescue nil
         {
           mode: 'raw',
           raw: json_body || @rspec_request.headers['RAW_POST_DATA'],
           options: {
             raw: {
-              language: @rspec_request.headers['Content-Type'] == 'application/json' ? 'json' : 'text'
+              language: json_body.present? ? 'json' : 'text'
             }
           }
         }
