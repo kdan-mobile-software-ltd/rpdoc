@@ -75,13 +75,14 @@ module Rpdoc
       end.compact
       query_string = @rspec_request.query_string.split('&').map do |string|
         key, value = string.split('=')
+        next if key.nil? || value.nil?
         {
           key: key,
           value: CGI.unescape(value),
           text: 'text'
         }
       end
-      @original_request_data = {
+      {
         method: @rspec_request.method,
         header: filter_headers,
         url: {
@@ -90,18 +91,44 @@ module Rpdoc
           path: @rspec_request.path.split('/'),
           query: query_string
         },
-        body: nil
+        body: original_request_data_body
       }
-      @original_request_data[:body] = {
-        mode: 'raw',
-        raw: JSON.pretty_generate(JSON.parse(@rspec_request.headers['RAW_POST_DATA'])),
-        options: {
-          raw: {
-            language: "json"
+    end
+
+    def original_request_data_body
+      if @rspec_request.headers['RAW_POST_DATA'].present? || @rspec_request.headers['Content-Type'] == 'application/json'
+        data = JSON.pretty_generate(JSON.parse(@rspec_request.headers['RAW_POST_DATA'])) rescue nil
+        {
+          mode: 'raw',
+          raw: json_body || @rspec_request.headers['RAW_POST_DATA'],
+          options: {
+            raw: {
+              language: @rspec_request.headers['Content-Type'] == 'application/json' ? 'json' : 'text'
+            }
           }
         }
-      } if @rspec_request.headers['RAW_POST_DATA'].present?
-      @original_request_data
-    end  
+      elsif @rspec_request.form_data?
+        {
+          mode: 'formdata',
+          formdata: request.request_parameters.map do |key, value|
+            if value.is_a?(ActionDispatch::Http::UploadedFile)
+              {
+                key: key,
+                src: value.original_filename,
+                type: 'file'
+              }
+            else
+              {
+                key: key,
+                value: value,
+                type: 'text'
+              }
+            end
+          end
+        }
+      else
+        nil
+      end
+    end
   end
 end
