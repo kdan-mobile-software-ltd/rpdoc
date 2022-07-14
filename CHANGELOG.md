@@ -1,5 +1,9 @@
+## [0.1.10] - 2022-07-14
+- Enable form-data request body
+
 ## [0.1.7, 0.1.8, 0.1.9] - 2022-02-14
 - Fix rspec parse zip response bug
+
 ## [0.1.6] - 2022-02-14
 - Update licnese
 
