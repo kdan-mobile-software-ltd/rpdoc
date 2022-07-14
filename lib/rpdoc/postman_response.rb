@@ -81,7 +81,7 @@ module Rpdoc
           value: CGI.unescape(value),
           text: 'text'
         }
-      end
+      end.compact
       {
         method: @rspec_request.method,
         header: filter_headers,
@@ -110,25 +110,38 @@ module Rpdoc
       elsif @rspec_request.form_data?
         {
           mode: 'formdata',
-          formdata: request.request_parameters.map do |key, value|
-            if value.is_a?(ActionDispatch::Http::UploadedFile)
-              {
-                key: key,
-                src: value.original_filename,
-                type: 'file'
-              }
-            else
-              {
-                key: key,
-                value: value,
-                type: 'text'
-              }
-            end
-          end
+          formdata: form_data_object_to_array(@rspec_request.request_parameters)
         }
       else
         nil
       end
+    end
+
+    def form_data_object_to_array(form_data, prefix: nil)
+      array = []
+      form_data.each do |key, value|
+        key = "#{prefix}[#{key}]" if prefix.present?
+        if value.is_a?(Hash)
+          array += form_data_object_to_array(value, prefix: key)
+        elsif value.is_a?(Array)
+          value.each do |item|
+            array += form_data_object_to_array(item, prefix: "#{key}[]")
+          end
+        elsif value.is_a?(ActionDispatch::Http::UploadedFile)
+          array << {
+            key: key,
+            src: value.original_filename,
+            type: 'file'
+          }
+        else
+          array << {
+            key: key,
+            value: value,
+            type: 'text'
+          }
+        end
+      end
+      array
     end
   end
 end
