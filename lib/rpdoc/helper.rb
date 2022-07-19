@@ -17,10 +17,7 @@ RSpec.configure do |config|
     if Rpdoc.configuration.rpdoc_enable
       postman_collection = Rpdoc::PostmanCollection.new
       postman_collection.save
-      if Rpdoc.configuration.rpdoc_auto_push
-        result = postman_collection.send(Rpdoc.configuration.rpdoc_auto_push_strategy)
-        raise StandardError.new(result) unless result['status'] == 200
-      end
+      postman_collection.send(Rpdoc.configuration.rpdoc_auto_push_strategy) if Rpdoc.configuration.rpdoc_auto_push
     end
   end
 end
