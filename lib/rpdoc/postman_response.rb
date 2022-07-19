@@ -75,13 +75,14 @@ module Rpdoc
       end.compact
       query_string = @rspec_request.query_string.split('&').map do |string|
         key, value = string.split('=')
+        next if key.nil? || value.nil?
         {
           key: key,
           value: CGI.unescape(value),
           text: 'text'
         }
-      end
-      @original_request_data = {
+      end.compact
+      {
         method: @rspec_request.method,
         header: filter_headers,
         url: {
@@ -90,18 +91,57 @@ module Rpdoc
           path: @rspec_request.path.split('/'),
           query: query_string
         },
-        body: nil
+        body: original_request_data_body
       }
-      @original_request_data[:body] = {
-        mode: 'raw',
-        raw: JSON.pretty_generate(JSON.parse(@rspec_request.headers['RAW_POST_DATA'])),
-        options: {
-          raw: {
-            language: "json"
+    end
+
+    def original_request_data_body
+      if @rspec_request.headers['RAW_POST_DATA'].present?
+        json_body = JSON.pretty_generate(JSON.parse(@rspec_request.headers['RAW_POST_DATA'])) rescue nil
+        {
+          mode: 'raw',
+          raw: json_body || @rspec_request.headers['RAW_POST_DATA'],
+          options: {
+            raw: {
+              language: json_body.present? ? 'json' : 'text'
+            }
           }
         }
-      } if @rspec_request.headers['RAW_POST_DATA'].present?
-      @original_request_data
-    end  
+      elsif @rspec_request.form_data?
+        {
+          mode: 'formdata',
+          formdata: form_data_object_to_array(@rspec_request.request_parameters)
+        }
+      else
+        nil
+      end
+    end
+
+    def form_data_object_to_array(form_data, prefix: nil)
+      array = []
+      form_data.each do |key, value|
+        key = "#{prefix}[#{key}]" if prefix.present?
+        if value.is_a?(Hash)
+          array += form_data_object_to_array(value, prefix: key)
+        elsif value.is_a?(Array)
+          value.each do |item|
+            array += form_data_object_to_array(item, prefix: "#{key}[]")
+          end
+        elsif value.is_a?(ActionDispatch::Http::UploadedFile)
+          array << {
+            key: key,
+            src: value.original_filename,
+            type: 'file'
+          }
+        else
+          array << {
+            key: key,
+            value: value,
+            type: 'text'
+          }
+        end
+      end
+      array
+    end
   end
 end

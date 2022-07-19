@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rpdoc (0.1.2)
+    rpdoc (0.1.10)
       json_requester (~> 1.0)
 
 GEM
@@ -33,35 +33,19 @@ GEM
     crass (1.0.6)
     diff-lcs (1.4.4)
     erubi (1.10.0)
-    faraday (1.8.0)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0.1)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.1)
-      faraday-patron (~> 1.0)
-      faraday-rack (~> 1.0)
-      multipart-post (>= 1.2, < 3)
+    faraday (2.3.0)
+      faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.2.0)
-    faraday-patron (1.0.0)
-    faraday-rack (1.0.0)
+    faraday-net_http (2.0.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    json_requester (1.0.3)
+    json_requester (1.0.7)
       faraday (>= 1.0.0)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
     minitest (5.14.4)
-    multipart-post (2.1.1)
     nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
     parallel (1.21.0)
@@ -132,4 +116,4 @@ DEPENDENCIES
   rubocop (~> 1.0)
 
 BUNDLED WITH
-   2.2.15
+   2.2.32
