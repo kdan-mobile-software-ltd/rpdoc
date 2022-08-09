@@ -24,4 +24,4 @@ to_gem:
     - gem build rpdoc.gemspec
     - gem push $GEM_NAME
   only:
-    - master
+    - /release-\d+\.\d+\.\d+(\.\d+)?/

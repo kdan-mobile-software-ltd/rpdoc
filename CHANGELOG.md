@@ -1,3 +1,6 @@
+## [0.1.11] - 2022-08-09
+- Check encoding names using instance (PR#1)
+
 ## [0.1.10] - 2022-07-14
 - Enable form-data request body
 
