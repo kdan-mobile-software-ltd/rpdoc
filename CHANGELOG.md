@@ -1,3 +1,6 @@
+## [0.1.12] - 2022-09-06
+- Handle encoding error
+
 ## [0.1.11] - 2022-08-09
 - Check encoding names using instance (PR#1)
 
