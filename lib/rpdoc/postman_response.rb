@@ -52,7 +52,7 @@ module Rpdoc
         data[:body] = JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
       else
         body = @rspec_response.body
-        data[:body] = body.encoding == Encoding::BINARY ? body.force_encoding(Encoding::ISO_8859_1).encode(Encoding::UTF_8) : body
+        data[:body] = body.encoding == Encoding::BINARY ? (body.force_encoding(Encoding::ISO_8859_1).encode(Encoding::UTF_8) rescue body) : body
       end
       data
     end
