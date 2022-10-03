@@ -136,7 +136,7 @@ module Rpdoc
     def clean_empty_folders_from(collection_items)
       return unless @configuration.rpdoc_clean_empty_folders
       collection_items.reject! do |item|
-        next false unless item.has_key?(:request)
+        next false if item.has_key?(:request)
         next false if @configuration.rpdoc_clean_empty_folders_except.include?(item[:name])
         clean_empty_folders_from(item[:item]) if item[:item].present?
         item[:item].nil? || item[:item].empty?
