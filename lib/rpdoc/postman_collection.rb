@@ -17,6 +17,8 @@ module Rpdoc
       headers = {
         'X-Api-Key': @configuration.postman_apikey
       }
+
+      clean_empty_folders_from(@data[:collection][:item])
       @requester.http_send(:post, path, @data, headers)
     end
 
@@ -29,6 +31,7 @@ module Rpdoc
       remote_collection_data = remote_collection_data['status'] == 200 ? remote_collection_data.deep_symbolize_keys.slice(:collection) : nil
       
       merged_by(remote_collection_data)
+      clean_empty_folders_from(remote_collection_data[:collection][:item])
       @requester.http_send(:put, path, remote_collection_data, headers)
     end
 
@@ -94,7 +97,7 @@ module Rpdoc
         if item.has_key?(:item)
           clean_generated_responses_from(item[:item])
         elsif item.has_key?(:response)
-          item[:response] = item[:response].reject do |response|
+          item[:response].reject! do |response|
             response.dig(:header)&.pluck(:key)&.include?('RSpec-Location')
           end
         end
@@ -128,6 +131,16 @@ module Rpdoc
             collection_items << from_item.deep_dup
           end
         end
+      end
+    end
+
+    def clean_empty_folders_from(collection_items)
+      return unless @configuration.rpdoc_clean_empty_folders
+      collection_items.reject! do |item|
+        next false unless item.has_key?(:request)
+        next false if @configuration.rpdoc_clean_empty_folders_except.include?(item[:name])
+        clean_empty_folders_from(item[:item]) if item[:item].present?
+        item[:item].nil? || item[:item].empty?
       end
     end
   end

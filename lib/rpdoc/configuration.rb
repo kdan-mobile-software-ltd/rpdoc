@@ -19,6 +19,8 @@ module Rpdoc
       :rpdoc_request_filename,
       :rpdoc_description_filename,
       :rpdoc_collection_filename,
+      :rpdoc_clean_empty_folders,
+      :rpdoc_clean_empty_folders_except,
       :rpdoc_auto_push,
       :rpdoc_auto_push_strategy
 
@@ -41,6 +43,10 @@ module Rpdoc
       @rpdoc_request_filename = 'request.json'
       @rpdoc_description_filename = 'description.md'
       @rpdoc_collection_filename = 'collection.json'
+
+      @rpdoc_clean_empty_folders = true
+      @rpdoc_clean_empty_folders_except = []
+
       @rpdoc_auto_push = false
       @rpdoc_auto_push_strategy = :push_and_create # or :push_and_update
     end

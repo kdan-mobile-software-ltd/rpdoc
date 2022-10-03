@@ -45,7 +45,7 @@ module Rpdoc
         originalRequest: original_request_data,
         status: @rspec_response.status.to_s,
         code: @rspec_response.code.to_i,
-        _postman_previewlanguage: "json",
+        _postman_previewlanguage: 'json',
         header: headers,
       }
       if @rspec_response.headers['Content-Type'].include?('application/json')

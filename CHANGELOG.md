@@ -1,3 +1,6 @@
+## [0.1.13] - 2022-10-03
+- Clean empty folders by default
+
 ## [0.1.12] - 2022-09-06
 - Handle encoding error
 

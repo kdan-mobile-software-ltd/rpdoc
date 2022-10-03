@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rpdoc (0.1.11)
+    rpdoc (0.1.12)
       json_requester (~> 1.0)
 
 GEM
