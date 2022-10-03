@@ -35,7 +35,7 @@ Rpdoc.configure do |config|
   # (Optional) Filename to store RSpec collection json data.
   # config.rpdoc_collection_filename = 'collection.json'
 
-  # (Optional) Clean empty folders. You can specify folder names to be ignored.
+  # (Optional) Clean empty folders. You can specify folder names which will be ignored when cleaning.
   # config.rpdoc_clean_empty_folders = true
   # config.rpdoc_clean_empty_folders_except = []
 

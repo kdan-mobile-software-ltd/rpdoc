@@ -10,6 +10,7 @@ module Rpdoc
       @requester = JsonRequester.new(@configuration.postman_host)
 
       @data = generated_collection_data
+      clean_empty_folders_from(@data[:collection][:item])
     end
 
     def push_and_create
@@ -17,8 +18,6 @@ module Rpdoc
       headers = {
         'X-Api-Key': @configuration.postman_apikey
       }
-
-      clean_empty_folders_from(@data[:collection][:item])
       @requester.http_send(:post, path, @data, headers)
     end
 

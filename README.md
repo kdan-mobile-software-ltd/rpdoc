@@ -72,6 +72,10 @@ Rpdoc.configure do |config|
   # (Optional) Auto push collection to Postman server or not.
   config.rpdoc_auto_push = false
 
+  # (Optional) Clean empty folders. You can specify folder names which will be ignored when cleaning.
+  config.rpdoc_clean_empty_folders = true
+  config.rpdoc_clean_empty_folders_except = []
+
   # (Optional) Auto push strategy, including :push_and_create and :push_and_update
   config.rpdoc_auto_push_strategy = :push_and_create
 end
