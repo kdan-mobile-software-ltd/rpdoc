@@ -1,3 +1,6 @@
+## [0.1.14] - 2023-02-09
+- Fix File object method has been removed error.
+
 ## [0.1.13] - 2022-10-03
 - Clean empty folders by default
 

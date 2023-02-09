@@ -18,10 +18,10 @@ module Rpdoc
     def save
       root_path ||= @configuration.rpdoc_root
       folder_path = "#{root_path}/#{@rspec_example.metadata[:rpdoc_example_folders].join('/')}/#{@rspec_example.metadata[:rpdoc_action_key]}"
-      FileUtils.mkdir_p(folder_path) unless File.exists?(folder_path)
+      FileUtils.mkdir_p(folder_path) unless File.exist?(folder_path)
 
       request_file_path = "#{folder_path}/#{@configuration.rpdoc_request_filename}"
-      File.open(request_file_path, 'w+') { |f| f.write(JSON.pretty_generate(request_data)) } unless File.exists?(request_file_path)
+      File.open(request_file_path, 'w+') { |f| f.write(JSON.pretty_generate(request_data)) } unless File.exist?(request_file_path)
 
       response_file_path = "#{folder_path}/#{@rspec_example.metadata[:rpdoc_example_key]}.json"
       File.open(response_file_path, 'w+') { |f| f.write(JSON.pretty_generate(response_data)) }
