@@ -132,6 +132,20 @@ end
 
 4. You can write description for your Postman collection by creating markdown files (named `description.md`) and putting each of them in corresponding location under `rpdoc` folder.
 
+## Notice
+
+If you try to mock the `File.open` method generate collection data will fail , because create request.json use `File.open` method.
+
+Solution:
+
+You can add code in RSpec 
+
+```ruby
+  after(:each) do
+    allow(File).to receive(:open).and_call_original
+  end
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
