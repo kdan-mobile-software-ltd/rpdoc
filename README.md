@@ -134,16 +134,16 @@ end
 
 ## Notice
 
-If you try to mock the `File.open` method generate collection data will fail , because create request.json use `File.open` method.
+If you try to mock the `File.open` method, generating collection data will fail because creating `request.json` use the `File.open` method.
 
 Solution:
 
-You can add code in RSpec 
+You can add code in RSpec.
 
 ```ruby
-  after(:each) do
-    allow(File).to receive(:open).and_call_original
-  end
+after(:each) do
+ allow(File).to receive(:open).and_call_original
+end
 ```
 
 ## License
