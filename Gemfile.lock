@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rpdoc (0.1.13)
+    rpdoc (0.1.14)
       json_requester (~> 1.0)
 
 GEM
@@ -47,6 +47,8 @@ GEM
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
     minitest (5.16.3)
+    nokogiri (1.13.8-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
     parallel (1.22.1)
@@ -108,6 +110,7 @@ GEM
     zeitwerk (2.6.1)
 
 PLATFORMS
+  arm64-darwin-20
   x86_64-darwin-19
 
 DEPENDENCIES
@@ -118,4 +121,4 @@ DEPENDENCIES
   rubocop (~> 1.0)
 
 BUNDLED WITH
-   2.2.32
+   2.3.4

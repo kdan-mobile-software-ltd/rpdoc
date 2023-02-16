@@ -6,7 +6,7 @@ RSpec.configure do |config|
     root = Rpdoc.configuration.rpdoc_root
     if Rpdoc.configuration.rpdoc_enable
       raise StandardError.new('Configuration Invalid') unless Rpdoc.configuration.valid?
-      FileUtils.mkdir_p(root) unless File.exists?(root)
+      FileUtils.mkdir_p(root) unless File.exist?(root)
       Dir.glob("#{root}/**/*.json") do |filename|
         File.delete(filename)
       end
