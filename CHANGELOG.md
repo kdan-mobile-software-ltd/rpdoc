@@ -1,3 +1,7 @@
+## [0.1.15] - 2023-05-18
+- Add gitlab templates.
+- Update gemspec.
+
 ## [0.1.14] - 2023-02-09
 - Fix File object method `exists` has been removed error at Ruby 3.2.1.
     - [Removed deprecated Dir.exists? and File.exists?](https://github.com/ruby/ruby/commit/bf97415c02b11a8949f715431aca9eeb6311add2)   
