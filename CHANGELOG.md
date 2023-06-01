@@ -1,3 +1,6 @@
+## [0.1.16] - 2023-06-01
+- Fix default rpdoc_example_folders bug.
+
 ## [0.1.15] - 2023-05-18
 - Add gitlab templates.
 - Update gemspec.

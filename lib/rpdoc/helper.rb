@@ -30,7 +30,7 @@ RSpec.shared_context 'rpdoc' do
       example.metadata[:rpdoc_action_name] ||= controller.action_name
       example.metadata[:rpdoc_example_key] ||= example.metadata[:description].underscore
       example.metadata[:rpdoc_example_name] ||= example.metadata[:description]
-      example.metadata[:rpdoc_example_folders] ||= controller.controller_path.split('/')
+      example.metadata[:rpdoc_example_folders] ||= controller.class.controller_path.split('/')
       
       postman_response = Rpdoc::PostmanResponse.new(example, request, response)
       postman_response.save
