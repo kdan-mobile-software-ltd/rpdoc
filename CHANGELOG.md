@@ -1,3 +1,6 @@
+## [0.1.17] - 2023-08-10
+- Add `rspec_root` option to configuration.
+
 ## [0.1.16] - 2023-06-01
 - Fix default rpdoc_example_folders bug.
 

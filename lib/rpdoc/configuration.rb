@@ -13,6 +13,7 @@ module Rpdoc
       :collection_workspace,
       :collection_uid,
       :collection_name,
+      :rspec_root,
       :rspec_server_host,
       :rspec_request_allow_headers,
       :rpdoc_root,
@@ -36,6 +37,7 @@ module Rpdoc
       @collection_name = 'Rpdoc'
       @collection_schema = 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
 
+      @rspec_root = 'spec'
       @rspec_server_host = '{{server_host}}'
       @rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 

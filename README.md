@@ -50,6 +50,9 @@ Rpdoc.configure do |config|
   
   # (Optional) Collection name.
   config.collection_name = 'Rpdoc'
+
+  # (Optional) Specs in folder are used for json data generation.
+  config.rspec_root = 'rspec'
   
   # (Optional) Your Rails server API host.
   config.rspec_server_host = '{{server_host}}'
@@ -57,7 +60,7 @@ Rpdoc.configure do |config|
   # (Optional) Since Rspec generates many noisy headers, you can filter them.
   config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 
-  # (Optional) Folder that Rpdoc use for json data generation and save.
+  # (Optional) Root folder where Rpdoc saves generated json data.
   config.rpdoc_root = 'rpdoc'
 
   # (Optional) Filename to store RSpec request json data.
