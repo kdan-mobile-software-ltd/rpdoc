@@ -18,7 +18,7 @@ Rpdoc.configure do |config|
   # config.collection_name = 'Rpdoc'
 
   # (Optional) Specs in folder are used for json data generation.
-  # config.rspec_root = 'rspec'
+  # config.rspec_root = 'spec'
   
   # (Optional) Your Rails server API host.
   # config.rspec_server_host = '{{server_host}}'
