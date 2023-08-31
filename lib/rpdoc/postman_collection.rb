@@ -9,7 +9,7 @@ module Rpdoc
     def initialize(configuration: nil, data: nil)
       @configuration = configuration || Rpdoc.configuration
       @requester = JsonRequester.new(@configuration.postman_host)
-      @data = data.deep_symbolize_keys || generated_collection_data
+      @data = data&.deep_symbolize_keys || generated_collection_data
 
       self.clean_empty_folders!
     end
