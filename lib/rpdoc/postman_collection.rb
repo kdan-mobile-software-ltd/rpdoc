@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'json_requester'
+require 'active_support'
+require 'active_support/core_ext'
 
 module Rpdoc
   class PostmanCollection
@@ -12,6 +14,10 @@ module Rpdoc
       @data = data&.deep_symbolize_keys || generated_collection_data
 
       self.clean_empty_folders!
+    end
+
+    def push
+      send(@configuration.rpdoc_auto_push_strategy)
     end
 
     def push_and_create
@@ -36,8 +42,9 @@ module Rpdoc
       @requester.http_send(:put, path, @data, headers)
     end
 
-    def save
-      File.open("#{@configuration.rpdoc_root}/#{@configuration.rpdoc_collection_filename}", 'w+') do |f|
+    def save(path: nil)
+      path ||= "#{@configuration.rpdoc_root}/#{@configuration.rpdoc_collection_filename}"
+      File.open(path, 'w+') do |f|
         f.write(JSON.pretty_generate(@data))
       end
     end
@@ -50,7 +57,7 @@ module Rpdoc
       clean_empty_folders_from(@data[:collection][:item])
     end
 
-    def clean_generated_items!
+    def clean_generated_responses!
       clean_generated_responses_from(@data[:collection][:item])
     end
 
@@ -112,7 +119,9 @@ module Rpdoc
 
     def insert_generated_responses_into(collection_items, from_collection_items: [])
       if collection_items.empty?
-        collection_items = from_collection_items.deep_dup
+        from_collection_items.each do |item|
+          collection_items << item.deep_dup
+        end
       else
         # transform collection_items into hash, using item[:name] as key
         item_hash = {}
