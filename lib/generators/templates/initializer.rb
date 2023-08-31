@@ -26,6 +26,9 @@ Rpdoc.configure do |config|
   # (Optional) Since Rspec generates many noisy headers, you can filter them.
   # config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 
+  # (Optional) Rspec response identifier, including :rspec_location and nil.
+  # config.rspec_response_identifier = :rspec_location
+
   # (Optional) Root folder where Rpdoc saves generated json data.
   # config.rpdoc_root = 'rpdoc'
 

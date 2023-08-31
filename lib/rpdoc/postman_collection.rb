@@ -4,13 +4,14 @@ require 'json_requester'
 
 module Rpdoc
   class PostmanCollection
+    attr_reader :data
 
-    def initialize
-      @configuration = Rpdoc.configuration
+    def initialize(configuration: nil, data: nil)
+      @configuration = configuration || Rpdoc.configuration
       @requester = JsonRequester.new(@configuration.postman_host)
+      @data = data.deep_symbolize_keys || generated_collection_data
 
-      @data = generated_collection_data
-      clean_empty_folders_from(@data[:collection][:item])
+      self.clean_empty_folders!
     end
 
     def push_and_create
@@ -28,16 +29,29 @@ module Rpdoc
       }
       remote_collection_data = @requester.http_send(:get, path, {}, headers)
       remote_collection_data = remote_collection_data['status'] == 200 ? remote_collection_data.deep_symbolize_keys.slice(:collection) : nil
+      remote_collection = PostmanCollection.new(data: remote_collection_data)
+      remote_collection.clean_generated_responses!
       
-      merged_by(remote_collection_data)
-      clean_empty_folders_from(remote_collection_data[:collection][:item])
-      @requester.http_send(:put, path, remote_collection_data, headers)
+      self.merge!(remote_collection)
+      @requester.http_send(:put, path, @data, headers)
     end
 
     def save
       File.open("#{@configuration.rpdoc_root}/#{@configuration.rpdoc_collection_filename}", 'w+') do |f|
         f.write(JSON.pretty_generate(@data))
       end
+    end
+
+    def merge!(other_collection)
+      insert_generated_responses_into(@data[:collection][:item], from_collection_items: other_collection.data[:collection][:item])
+    end
+
+    def clean_empty_folders!
+      clean_empty_folders_from(@data[:collection][:item])
+    end
+
+    def clean_generated_items!
+      clean_generated_responses_from(@data[:collection][:item])
     end
 
     private
@@ -82,13 +96,6 @@ module Rpdoc
         end
       end
       data
-    end
-
-    def merged_by(other_collection_data)
-      clean_generated_responses_from(other_collection_data[:collection][:item])
-
-      other_collection_data[:collection][:info][:description] = @data[:collection][:info][:description]
-      insert_generated_responses_into(other_collection_data[:collection][:item], from_collection_items: @data[:collection][:item])
     end
 
     def clean_generated_responses_from(collection_items)

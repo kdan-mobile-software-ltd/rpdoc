@@ -39,7 +39,7 @@ module Rpdoc
 
     def response_data
       headers = @rspec_response.header.map { |key, value| {key: key, value: value} }
-      headers << rspec_location_header
+      headers << rspec_response_identifier_header if @configuration.rspec_response_identifier.present?
       data = {
         name: @rspec_example.metadata[:rpdoc_example_name],
         originalRequest: original_request_data,
@@ -57,7 +57,7 @@ module Rpdoc
       data
     end
 
-    def rspec_location_header
+    def rspec_response_identifier_header
       {
         key: 'RSpec-Location',
         value: @rspec_example.metadata[:location]

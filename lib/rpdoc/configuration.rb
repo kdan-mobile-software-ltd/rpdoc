@@ -16,6 +16,7 @@ module Rpdoc
       :rspec_root,
       :rspec_server_host,
       :rspec_request_allow_headers,
+      :rspec_response_identifier,
       :rpdoc_root,
       :rpdoc_request_filename,
       :rpdoc_description_filename,
@@ -25,7 +26,10 @@ module Rpdoc
       :rpdoc_auto_push,
       :rpdoc_auto_push_strategy
 
-    def initialize
+    RSPEC_RESPONSE_IDENTIFIERS = [:rspec_location, nil].freeze
+    RPDOC_AUTO_PUSH_STRATEGIES = [:push_and_create, :push_and_update].freeze
+
+    def initialize(**kwargs)
       @rpdoc_enable = ENV['RPDOC_ENABLE'] != 'false'
 
       @postman_host = 'https://api.getpostman.com'
@@ -40,6 +44,7 @@ module Rpdoc
       @rspec_root = 'spec'
       @rspec_server_host = '{{server_host}}'
       @rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
+      @rspec_response_identifier = :rspec_location
 
       @rpdoc_root = 'rpdoc'
       @rpdoc_request_filename = 'request.json'
@@ -50,12 +55,14 @@ module Rpdoc
       @rpdoc_clean_empty_folders_except = []
 
       @rpdoc_auto_push = false
-      @rpdoc_auto_push_strategy = :push_and_create # or :push_and_update
+      @rpdoc_auto_push_strategy = :push_and_create
     end
   
     def valid?
       return true unless @rpdoc_enable && @rpdoc_auto_push
       return false if @postman_apikey.nil?
+      return false unless RSPEC_RESPONSE_IDENTIFIERS.include?(@rspec_response_identifier.to_sym)
+      return false unless RPDOC_AUTO_PUSH_STRATEGIES.include?(@rpdoc_auto_push_strategy.to_sym)
       return false if @rpdoc_auto_push_strategy == :push_and_update && @collection_uid.nil?
       true
     end
