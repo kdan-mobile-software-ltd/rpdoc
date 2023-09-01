@@ -29,7 +29,7 @@ module Rpdoc
     RSPEC_RESPONSE_IDENTIFIERS = [:rspec_location, nil].freeze
     RPDOC_AUTO_PUSH_STRATEGIES = [:push_and_create, :push_and_update].freeze
 
-    def initialize(**kwargs)
+    def initialize
       @rpdoc_enable = ENV['RPDOC_ENABLE'] != 'false'
 
       @postman_host = 'https://api.getpostman.com'

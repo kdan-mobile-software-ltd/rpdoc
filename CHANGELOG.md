@@ -1,5 +1,8 @@
-## [0.1.17] - 2023-08-10
-- Add `rspec_root` option to configuration.
+## [0.1.17] - 2023-09-01
+- Add `rspec_root` and `rspec_response_identifier` options to configuration.
+- Add public method `merge!` for PostmanCollection.
+- Fix rake usage.
+- Refactor.
 
 ## [0.1.16] - 2023-06-01
 - Fix default rpdoc_example_folders bug.

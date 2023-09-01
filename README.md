@@ -60,6 +60,9 @@ Rpdoc.configure do |config|
   # (Optional) Since Rspec generates many noisy headers, you can filter them.
   config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 
+  # (Optional) Rspec response identifier, including :rspec_location and nil.
+  config.rspec_response_identifier = :rspec_location
+
   # (Optional) Root folder where Rpdoc saves generated json data.
   config.rpdoc_root = 'rpdoc'
 
@@ -95,7 +98,7 @@ end
       ...
     end
    ```
-2. Customiz your example [metdata](https://relishapp.com/rspec/rspec-core/docs/metadata/user-defined-metadata) to generate collection data in your preferenced format.
+2. Customize your example [metdata](https://relishapp.com/rspec/rspec-core/docs/metadata/user-defined-metadata) to generate collection data in your preferenced format.
     ```ruby
     it 'should return 200' do |example|
         # Request identifier.
@@ -135,9 +138,11 @@ end
 
 4. You can write description for your Postman collection by creating markdown files (named `description.md`) and putting each of them in corresponding location under `rpdoc` folder.
 
+5. You can push your collection to Postman server manually through `rake rpdoc:push`.
+
 ## Notice
 
-If you try to mock the `File.open` method, generating collection data will fail because creating `request.json` use the `File.open` method.
+If you try to mock the `File.open` method, generating collection data will fail because creating `request.json` uses the `File.open` method.
 
 Solution:
 

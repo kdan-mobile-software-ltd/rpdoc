@@ -50,7 +50,7 @@ module Rpdoc
     end
 
     def merge!(other_collection)
-      insert_generated_responses_into(@data[:collection][:item], from_collection_items: other_collection.data[:collection][:item])
+      insert_generated_responses_into(@data[:collection][:item], from_collection_items: other_collection.data[:collection][:item].to_a)
     end
 
     def clean_empty_folders!
@@ -135,7 +135,7 @@ module Rpdoc
           if item_hash.has_key?(from_item_name)
             if from_item.has_key?(:item) && item_hash[from_item_name].has_key?(:item)
               item_hash[from_item_name][:description] = from_item[:description]
-              insert_generated_responses_into(item_hash[from_item_name][:item], from_collection_items: from_item[:item])
+              insert_generated_responses_into(item_hash[from_item_name][:item], from_collection_items: from_item[:item].to_a)
             elsif from_item.has_key?(:response) && item_hash[from_item_name].has_key?(:response)
               item_hash[from_item_name][:request][:description] = from_item[:request][:description]
               item_hash[from_item_name][:response] += from_item[:response].deep_dup
@@ -151,7 +151,7 @@ module Rpdoc
 
     def clean_empty_folders_from(collection_items)
       return unless @configuration.rpdoc_clean_empty_folders
-      collection_items.reject! do |item|
+      collection_items&.reject! do |item|
         next false if item.has_key?(:request)
         next false if @configuration.rpdoc_clean_empty_folders_except.include?(item[:name])
         clean_empty_folders_from(item[:item]) if item[:item].present?
