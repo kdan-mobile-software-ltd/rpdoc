@@ -23,6 +23,7 @@ module Rpdoc
       :rpdoc_collection_filename,
       :rpdoc_clean_empty_folders,
       :rpdoc_clean_empty_folders_except,
+      :rpdoc_folder_ordering,
       :rpdoc_auto_push,
       :rpdoc_auto_push_strategy
 
@@ -53,6 +54,7 @@ module Rpdoc
 
       @rpdoc_clean_empty_folders = true
       @rpdoc_clean_empty_folders_except = []
+      @rpdoc_folder_ordering = []
 
       @rpdoc_auto_push = false
       @rpdoc_auto_push_strategy = :push_and_create

@@ -14,6 +14,7 @@ module Rpdoc
       @data = data&.deep_symbolize_keys || generated_collection_data
 
       self.clean_empty_folders!
+      self.reordering!
     end
 
     def push
@@ -51,6 +52,7 @@ module Rpdoc
 
     def merge!(other_collection)
       insert_generated_responses_into(@data[:collection][:item], from_collection_items: other_collection.data[:collection][:item].to_a)
+      sort_folders_from(@data[:collection][:item])
     end
 
     def clean_empty_folders!
@@ -59,6 +61,10 @@ module Rpdoc
 
     def clean_generated_responses!
       clean_generated_responses_from(@data[:collection][:item])
+    end
+
+    def reordering!
+      sort_folders_from(@data[:collection][:item])
     end
 
     private
@@ -156,6 +162,18 @@ module Rpdoc
         next false if @configuration.rpdoc_clean_empty_folders_except.include?(item[:name])
         clean_empty_folders_from(item[:item]) if item[:item].present?
         item[:item].nil? || item[:item].empty?
+      end
+    end
+
+    def sort_folders_from(collection_items)
+      return unless @configuration.rpdoc_folder_ordering.present?
+      if @configuration.rpdoc_folder_ordering == :asc
+        collection_items&.sort_by! { |item| item[:name] }
+      elsif @configuration.rpdoc_folder_ordering == :desc
+        collection_items&.sort_by! { |item| item[:name] }.reverse!
+      elsif @configuration.rpdoc_folder_ordering.is_a?(Array)
+        # sort by array and then sort by asc
+        collection_items&.sort_by! { |item| [@configuration.rpdoc_folder_ordering.index(item[:name]) || Float::INFINITY, item[:name]] }
       end
     end
   end

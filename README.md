@@ -82,6 +82,9 @@ Rpdoc.configure do |config|
   config.rpdoc_clean_empty_folders = true
   config.rpdoc_clean_empty_folders_except = []
 
+  # (Optional) Folder ordering, including :asc, :desc, and custom array.
+  config.rpdoc_folder_ordering = :asc
+
   # (Optional) Auto push strategy, including :push_and_create and :push_and_update
   config.rpdoc_auto_push_strategy = :push_and_create
 end

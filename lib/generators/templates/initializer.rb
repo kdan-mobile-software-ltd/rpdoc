@@ -45,6 +45,9 @@ Rpdoc.configure do |config|
   # config.rpdoc_clean_empty_folders = true
   # config.rpdoc_clean_empty_folders_except = []
 
+  # (Optional) Folder ordering, including :asc, :desc, and custom array.
+  # config.rpdoc_folder_ordering = :asc
+
   # (Optional) Auto push collection to Postman server or not.
   # config.rpdoc_auto_push = false
 
