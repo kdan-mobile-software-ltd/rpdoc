@@ -38,9 +38,8 @@ module Rpdoc
       remote_collection_data = remote_collection_data['status'] == 200 ? remote_collection_data.deep_symbolize_keys.slice(:collection) : nil
       remote_collection = PostmanCollection.new(data: remote_collection_data)
       remote_collection.clean_generated_responses!
-      
-      self.merge!(remote_collection)
-      @requester.http_send(:put, path, @data, headers)
+      remote_collection.merge!(self)
+      @requester.http_send(:put, path, remote_collection.data, headers)
     end
 
     def save(path: nil)
