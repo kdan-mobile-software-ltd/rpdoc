@@ -23,8 +23,11 @@ Rpdoc.configure do |config|
   # (Optional) Your Rails server API host.
   # config.rspec_server_host = '{{server_host}}'
 
-  # (Optional) Since Rspec generates many noisy headers, you can filter them.
+  # (Optional) Since Rspec generates many noisy request headers, you can filter them.
   # config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
+
+  # (Optional) Since Rspec generates many noisy response headers, you can filter them.
+  # config.rspec_response_allow_headers = ['Content-Type', 'Content-Length', 'Location']
 
   # (Optional) Rspec response identifier, including :rspec_location and nil.
   # config.rspec_response_identifier = :rspec_location
