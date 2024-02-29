@@ -29,6 +29,7 @@ module Rpdoc
       :rpdoc_auto_push_strategy
 
     RSPEC_RESPONSE_IDENTIFIERS = [:rspec_location, nil].freeze
+    RPDOC_FOLDER_ORDERING = [:asc, :desc].freeze
     RPDOC_AUTO_PUSH_STRATEGIES = [:push_and_create, :push_and_update].freeze
 
     def initialize
@@ -68,6 +69,7 @@ module Rpdoc
       return false unless RSPEC_RESPONSE_IDENTIFIERS.include?(@rspec_response_identifier.to_sym)
       return false unless RPDOC_AUTO_PUSH_STRATEGIES.include?(@rpdoc_auto_push_strategy.to_sym)
       return false if @rpdoc_auto_push_strategy == :push_and_update && @collection_uid.nil?
+      return false if @rpdoc_folder_ordering.present? && (RPDOC_FOLDER_ORDERING.exclude?(@rpdoc_folder_ordering) || !@rpdoc_folder_ordering.is_a?(Array))
       true
     end
   end

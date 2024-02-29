@@ -1,4 +1,4 @@
-## [0.1.17] - 2023-09-01
+## [0.2.0] - 2024-02-29
 - Add `rspec_root`, `rspec_response_allow_headers`, and `rspec_response_identifier` options to configuration.
 - Add public method `merge!` for PostmanCollection.
 - Fix rake usage.

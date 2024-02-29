@@ -144,7 +144,7 @@ end
 
 4. You can write description for your Postman collection by creating markdown files (named `description.md`) and putting each of them in corresponding location under `rpdoc` folder.
 
-5. You can push your collection to Postman server manually through `rake rpdoc:push`.
+5. You can manually push your collection to the Postman server through `rake rpdoc:push`.
 
 ## Notice
 
