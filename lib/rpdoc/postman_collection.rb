@@ -116,7 +116,7 @@ module Rpdoc
           clean_generated_responses_from(item[:item])
         elsif item.has_key?(:response)
           item[:response].reject! do |response|
-            response.dig(:header)&.pluck(:key)&.include?('RSpec-Location')
+            @configuration.rspec_response_identifier.present? ? response.dig(:header)&.pluck(:key)&.include?('RSpec-Location') : true
           end
         end
       end
