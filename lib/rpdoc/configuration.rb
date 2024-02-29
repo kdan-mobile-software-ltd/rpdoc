@@ -16,6 +16,7 @@ module Rpdoc
       :rspec_root,
       :rspec_server_host,
       :rspec_request_allow_headers,
+      :rspec_response_allow_headers,
       :rspec_response_identifier,
       :rpdoc_root,
       :rpdoc_request_filename,
@@ -45,6 +46,7 @@ module Rpdoc
       @rspec_root = 'spec'
       @rspec_server_host = '{{server_host}}'
       @rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
+      @rspec_response_allow_headers = ['Content-Type', 'Content-Length', 'Location']
       @rspec_response_identifier = :rspec_location
 
       @rpdoc_root = 'rpdoc'

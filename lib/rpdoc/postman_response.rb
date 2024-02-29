@@ -38,7 +38,8 @@ module Rpdoc
     end
 
     def response_data
-      headers = @rspec_response.header.map { |key, value| {key: key, value: value} }
+      header = @rspec_response.header.slice(*@configuration.rspec_response_allow_headers) if @configuration.rspec_response_allow_headers.present?
+      headers = header.map { |key, value| { key: key, value: value } }
       headers << rspec_response_identifier_header if @configuration.rspec_response_identifier.present?
       data = {
         name: @rspec_example.metadata[:rpdoc_example_name],
