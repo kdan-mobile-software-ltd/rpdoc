@@ -45,13 +45,14 @@ module Rpdoc
         originalRequest: original_request_data,
         status: @rspec_response.status.to_s,
         code: @rspec_response.code.to_i,
-        _postman_previewlanguage: 'json',
         header: headers,
       }
       if @rspec_response.headers['Content-Type'].include?('application/json')
+        data[:_postman_previewlanguage] = 'json'
         data[:body] = JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
       else
         body = @rspec_response.body
+        data[:_postman_previewlanguage] = 'text'
         data[:body] = body.encoding == Encoding::BINARY ? (body.force_encoding(Encoding::ISO_8859_1).encode(Encoding::UTF_8) rescue body) : body
       end
       data
