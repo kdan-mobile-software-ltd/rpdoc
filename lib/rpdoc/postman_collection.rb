@@ -50,6 +50,8 @@ module Rpdoc
     end
 
     def merge!(other_collection)
+      @data[:collection][:info][:name] = other_collection.data[:collection][:info][:name]
+      @data[:collection][:info][:description] = other_collection.data[:collection][:info][:description]
       insert_generated_responses_into(@data[:collection][:item], from_collection_items: other_collection.data[:collection][:item].to_a)
       sort_folders_from(@data[:collection][:item])
     end
