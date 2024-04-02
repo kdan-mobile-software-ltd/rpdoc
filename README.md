@@ -95,16 +95,16 @@ end
 
 ## Usage
 
-`Rpdoc` only supports RSpec examples with [request](https://relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec) type.
+`Rpdoc` only supports RSpec examples with [request](https://rspec.info/features/6-1/rspec-rails/request-specs/request-spec/) type.
 
-1. Include [shared_context](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-context) in your spec to make `Rpdoc` identify which examples to transform.
+1. Include [shared_context](https://rspec.info/features/3-13/rspec-core/example-groups/shared-context/) in your spec to make `Rpdoc` identify which examples to transform.
     ```ruby
     RSpec.describe 'POST /api/v1/books', type: :request do
       include_context 'rpdoc'
       ...
     end
    ```
-2. Customize your example [metdata](https://relishapp.com/rspec/rspec-core/docs/metadata/user-defined-metadata) to generate collection data in your preferenced format.
+2. Customize your example [metdata](https://rspec.info/features/3-13/rspec-core/metadata/user-defined/) to generate collection data in your preferenced format.
     ```ruby
     it 'should return 200' do |example|
         # Request identifier.
