@@ -38,26 +38,28 @@ module Rpdoc
     end
 
     def response_data
-      headers = @rspec_response.header.map { |key, value| {key: key, value: value} }
-      headers << rspec_location_header
+      header = @rspec_response.header.slice(*@configuration.rspec_response_allow_headers) if @configuration.rspec_response_allow_headers.present?
+      headers = header.map { |key, value| { key: key, value: value } }
+      headers << rspec_response_identifier_header if @configuration.rspec_response_identifier.present?
       data = {
         name: @rspec_example.metadata[:rpdoc_example_name],
         originalRequest: original_request_data,
         status: @rspec_response.status.to_s,
         code: @rspec_response.code.to_i,
-        _postman_previewlanguage: 'json',
         header: headers,
       }
       if @rspec_response.headers['Content-Type'].include?('application/json')
+        data[:_postman_previewlanguage] = 'json'
         data[:body] = JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
       else
         body = @rspec_response.body
+        data[:_postman_previewlanguage] = 'text'
         data[:body] = body.encoding == Encoding::BINARY ? (body.force_encoding(Encoding::ISO_8859_1).encode(Encoding::UTF_8) rescue body) : body
       end
       data
     end
 
-    def rspec_location_header
+    def rspec_response_identifier_header
       {
         key: 'RSpec-Location',
         value: @rspec_example.metadata[:location]

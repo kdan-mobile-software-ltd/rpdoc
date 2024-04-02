@@ -16,14 +16,23 @@ Rpdoc.configure do |config|
   
   # (Optional) Collection name.
   # config.collection_name = 'Rpdoc'
+
+  # (Optional) Specs in folder are used for json data generation.
+  # config.rspec_root = 'spec'
   
   # (Optional) Your Rails server API host.
   # config.rspec_server_host = '{{server_host}}'
 
-  # (Optional) Since Rspec generates many noisy headers, you can filter them.
+  # (Optional) Since Rspec generates many noisy request headers, you can filter them.
   # config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 
-  # (Optional) Folder that Rpdoc use for json data generation and save.
+  # (Optional) Since Rspec generates many noisy response headers, you can filter them.
+  # config.rspec_response_allow_headers = ['Content-Type', 'Content-Length', 'Location']
+
+  # (Optional) Rspec response identifier, including :rspec_location and nil.
+  # config.rspec_response_identifier = :rspec_location
+
+  # (Optional) Root folder where Rpdoc saves generated json data.
   # config.rpdoc_root = 'rpdoc'
 
   # (Optional) Filename to store RSpec request json data.
@@ -38,6 +47,9 @@ Rpdoc.configure do |config|
   # (Optional) Clean empty folders. You can specify folder names which will be ignored when cleaning.
   # config.rpdoc_clean_empty_folders = true
   # config.rpdoc_clean_empty_folders_except = []
+
+  # (Optional) Folder ordering, including :asc, :desc, and custom array.
+  # config.rpdoc_folder_ordering = :asc
 
   # (Optional) Auto push collection to Postman server or not.
   # config.rpdoc_auto_push = false

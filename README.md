@@ -50,14 +50,23 @@ Rpdoc.configure do |config|
   
   # (Optional) Collection name.
   config.collection_name = 'Rpdoc'
+
+  # (Optional) Specs in folder are used for json data generation.
+  config.rspec_root = 'rspec'
   
   # (Optional) Your Rails server API host.
   config.rspec_server_host = '{{server_host}}'
 
-  # (Optional) Since Rspec generates many noisy headers, you can filter them.
+  # (Optional) Since Rspec generates many noisy request headers, you can filter them.
   config.rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
 
-  # (Optional) Folder that Rpdoc use for json data generation and save.
+  # (Optional) Since Rspec generates many noisy response headers, you can filter them.
+  config.rspec_response_allow_headers = ['Content-Type', 'Content-Length', 'Location']
+
+  # (Optional) Rspec response identifier, including :rspec_location and nil.
+  config.rspec_response_identifier = :rspec_location
+
+  # (Optional) Root folder where Rpdoc saves generated json data.
   config.rpdoc_root = 'rpdoc'
 
   # (Optional) Filename to store RSpec request json data.
@@ -76,6 +85,9 @@ Rpdoc.configure do |config|
   config.rpdoc_clean_empty_folders = true
   config.rpdoc_clean_empty_folders_except = []
 
+  # (Optional) Folder ordering, including :asc, :desc, and custom array.
+  config.rpdoc_folder_ordering = :asc
+
   # (Optional) Auto push strategy, including :push_and_create and :push_and_update
   config.rpdoc_auto_push_strategy = :push_and_create
 end
@@ -83,16 +95,16 @@ end
 
 ## Usage
 
-`Rpdoc` only supports RSpec examples with [request](https://relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec) type.
+`Rpdoc` only supports RSpec examples with [request](https://rspec.info/features/6-1/rspec-rails/request-specs/request-spec/) type.
 
-1. Include [shared_context](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-context) in your spec to make `Rpdoc` identify which examples to transform.
+1. Include [shared_context](https://rspec.info/features/3-13/rspec-core/example-groups/shared-context/) in your spec to make `Rpdoc` identify which examples to transform.
     ```ruby
     RSpec.describe 'POST /api/v1/books', type: :request do
       include_context 'rpdoc'
       ...
     end
    ```
-2. Customiz your example [metdata](https://relishapp.com/rspec/rspec-core/docs/metadata/user-defined-metadata) to generate collection data in your preferenced format.
+2. Customize your example [metdata](https://rspec.info/features/3-13/rspec-core/metadata/user-defined/) to generate collection data in your preferenced format.
     ```ruby
     it 'should return 200' do |example|
         # Request identifier.
@@ -132,9 +144,11 @@ end
 
 4. You can write description for your Postman collection by creating markdown files (named `description.md`) and putting each of them in corresponding location under `rpdoc` folder.
 
+5. You can manually push your collection to the Postman server through `rake rpdoc:push`.
+
 ## Notice
 
-If you try to mock the `File.open` method, generating collection data will fail because creating `request.json` use the `File.open` method.
+If you try to mock the `File.open` method, generating collection data will fail because creating `request.json` uses the `File.open` method.
 
 Solution:
 

@@ -1,3 +1,9 @@
+## [0.2.0] - 2024-04-02
+- Add `rspec_root`, `rspec_response_allow_headers`, and `rspec_response_identifier` options to configuration.
+- Add public method `merge!` for PostmanCollection.
+- Fix rake usage.
+- Refactor.
+
 ## [0.1.16] - 2023-06-01
 - Fix default rpdoc_example_folders bug.
 

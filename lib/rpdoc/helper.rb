@@ -25,7 +25,13 @@ end
 RSpec.shared_context 'rpdoc' do
   after(:each) do |example|
     example.metadata[:rpdoc_skip] ||= false
-    if Rpdoc.configuration.rpdoc_enable && example.exception.nil? && example.metadata[:type] == :request && example.metadata[:rpdoc_skip] == false
+
+    example_usable = true
+    example_usable &&= example.metadata[:rpdoc_skip] == false
+    example_usable &&= File.expand_path(example.metadata[:file_path]).start_with?(File.expand_path(Rpdoc.configuration.rspec_root))
+    example_usable &&= example.exception.nil? && example.metadata[:type] == :request
+
+    if Rpdoc.configuration.rpdoc_enable && example_usable
       example.metadata[:rpdoc_action_key] ||= controller.action_name
       example.metadata[:rpdoc_action_name] ||= controller.action_name
       example.metadata[:rpdoc_example_key] ||= example.metadata[:description].underscore
