@@ -66,7 +66,7 @@ module Rpdoc
     def valid?
       return true unless @rpdoc_enable && @rpdoc_auto_push
       return false if @postman_apikey.nil?
-      return false unless RSPEC_RESPONSE_IDENTIFIERS.include?(@rspec_response_identifier.to_sym)
+      return false unless RSPEC_RESPONSE_IDENTIFIERS.include?(@rspec_response_identifier&.to_sym)
       return false unless RPDOC_AUTO_PUSH_STRATEGIES.include?(@rpdoc_auto_push_strategy.to_sym)
       return false if @rpdoc_auto_push_strategy == :push_and_update && @collection_uid.nil?
       return false if @rpdoc_folder_ordering.present? && (RPDOC_FOLDER_ORDERING.exclude?(@rpdoc_folder_ordering) || !@rpdoc_folder_ordering.is_a?(Array))
