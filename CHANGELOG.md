@@ -1,6 +1,6 @@
 ## [0.2.1] - 2024-04-11
 - Fix `rspec_response_identifier` option bug.
-- Fix path bug for redirected requests.
+- Fix path bug for redirected requests and `push_and_update` strategy.
 
 ## [0.2.0] - 2024-04-02
 - Add `rspec_root`, `rspec_response_allow_headers`, and `rspec_response_identifier` options to configuration.
