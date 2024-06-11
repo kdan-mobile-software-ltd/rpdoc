@@ -144,7 +144,7 @@ module Rpdoc
               item_hash[from_item_name][:description] = from_item[:description]
               insert_generated_responses_into(item_hash[from_item_name][:item], from_collection_items: from_item[:item].to_a)
             elsif from_item.has_key?(:response) && item_hash[from_item_name].has_key?(:response)
-              item_hash[from_item_name][:request][:description] = from_item[:request][:description]
+              item_hash[from_item_name][:request] = from_item[:request].deep_dup
               item_hash[from_item_name][:response] += from_item[:response].deep_dup
             else
               collection_items << from_item.deep_dup

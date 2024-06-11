@@ -84,13 +84,15 @@ module Rpdoc
           text: 'text'
         }
       end.compact
+
+      original_path = @rspec_request.original_fullpath.split('?').first # use original_fullpath instead of path to avoid request being redirected
       {
         method: @rspec_request.method,
         header: filter_headers,
         url: {
-          raw: "#{@configuration.rspec_server_host}#{@rspec_request.path}",
+          raw: "#{@configuration.rspec_server_host}#{original_path}",
           host: [@configuration.rspec_server_host],
-          path: @rspec_request.path.split('/'),
+          path: original_path.split('/'),
           query: query_string
         },
         body: original_request_data_body
