@@ -39,7 +39,7 @@ module Rpdoc
       remote_collection = PostmanCollection.new(data: remote_collection_data)
       remote_collection.clean_generated_responses!
       remote_collection.merge!(self)
-      @requester.http_send(:put, path, remote_collection.data, headers)
+      @requester.http_send(:put, path, remote_collection.data, headers, content_type_charset: nil)
     end
 
     def save(path: nil)
