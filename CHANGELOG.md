@@ -1,3 +1,6 @@
+## [0.2.2] - 2024-06-28
+- Fix push_and_update strategy bug.
+
 ## [0.2.1] - 2024-04-11
 - Fix `rspec_response_identifier` option bug.
 - Fix path bug for redirected requests and `push_and_update` strategy.
