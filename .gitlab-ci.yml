@@ -1,4 +1,11 @@
+include:
+  - project: "kdanmobile/deployment/cluster-cicd-config"
+    ref: master
+    file: "/gitlab-ci/node-brakeman-sast-upload.yaml"
+
 stages:
+  - test
+  - sast_upload
   - rspec
   - publish
 
