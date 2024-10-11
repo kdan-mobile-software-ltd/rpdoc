@@ -1,3 +1,6 @@
+## [0.2.3] - 2024-10-09
+- Support rails 7+.
+
 ## [0.2.2] - 2024-06-28
 - Fix push_and_update strategy bug.
 
