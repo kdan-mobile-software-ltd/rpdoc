@@ -1,3 +1,7 @@
+## [0.2.4] - 2025-07-16
+- Update gemspec.
+- Update CI to use Ruby 3.4.5.
+
 ## [0.2.3] - 2024-10-09
 - Support rails 7+.
 

@@ -11,18 +11,18 @@ stages:
 
 rspec:
   stage: rspec
-  image: ruby:3.3.5
+  image: ruby:3.4.5
   tags:
     - arm64
   script:
     - bundle install
-    - RPDOC_ENABLE=false rspec spec -fd
+    - RPDOC_ENABLE=false rspec spec
   only:
     - master
 
 to_gem:
   stage: publish
-  image: ruby:3.3.5
+  image: ruby:3.4.5
   tags:
     - arm64
   script:
