@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rpdoc"
+require 'rpdoc'
 
 describe Rpdoc::Configuration do
   it 'should be configurable' do

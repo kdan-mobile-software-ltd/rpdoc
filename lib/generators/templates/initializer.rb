@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rpdoc.configure do |config|
+
   # (Optional) You can disable rpdoc generation process manually.
   # config.rpdoc_enable = true
 
