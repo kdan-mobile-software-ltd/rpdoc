@@ -83,6 +83,8 @@ GEM
       uri
     nokogiri (1.18.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-gnu)
+      racc (~> 1.4)
     parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)
@@ -170,7 +172,9 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
+  arm64-darwin-24
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   pry (>= 0.14.1)
