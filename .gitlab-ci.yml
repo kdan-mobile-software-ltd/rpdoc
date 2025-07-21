@@ -15,11 +15,12 @@ rspec:
   tags:
     - arm64
   script:
+    - bundle config set --local path 'vendor/bundle'
     - RELEASE_VERSION=$(cat VERSION.md)
     - gem build rpdoc.gemspec
-    - gem install rpdoc-$RELEASE_VERSION.gem
+    - gem install rpdoc-$RELEASE_VERSION.gem --local
     - bundle install
-    - RPDOC_ENABLE=false rspec spec
+    - RPDOC_ENABLE=false bundle exec rspec spec
   only:
     - master
 
