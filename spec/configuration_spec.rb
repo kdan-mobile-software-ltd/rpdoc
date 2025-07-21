@@ -18,7 +18,7 @@ describe Rpdoc::Configuration do
       config.rpdoc_auto_push = true
       config.rpdoc_auto_push_strategy = :push_and_update
     end
-    
+
     expect(Rpdoc.configuration.postman_apikey).to eq('postman_apikey')
     expect(Rpdoc.configuration.collection_workspace).to eq('collection_workspace')
     expect(Rpdoc.configuration.collection_uid).to eq('collection_uid')

@@ -10,16 +10,16 @@ Rpdoc.configure do |config|
 
   # (Optional) Workspace that your collection will be pushed to. Default your account's personal workspace.
   # config.collection_workspace = 'collection_workspace'
-  
+
   # (Optional) Your existing collection uid. Will update it when using :push_and_update push strategy.
   # config.collection_uid = 'collection_uid'
-  
+
   # (Optional) Collection name.
   # config.collection_name = 'Rpdoc'
 
   # (Optional) Specs in folder are used for json data generation.
   # config.rspec_root = 'spec'
-  
+
   # (Optional) Your Rails server API host.
   # config.rspec_server_host = '{{server_host}}'
 
