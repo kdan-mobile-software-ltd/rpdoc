@@ -15,7 +15,9 @@ rspec:
   tags:
     - arm64
   script:
+    - RELEASE_VERSION=$(cat VERSION.md)
     - gem build rpdoc.gemspec
+    - gem install rpdoc-$RELEASE_VERSION.gem
     - bundle install
     - RPDOC_ENABLE=false rspec spec
   only:
