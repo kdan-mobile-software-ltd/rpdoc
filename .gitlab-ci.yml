@@ -15,6 +15,7 @@ rspec:
   tags:
     - arm64
   script:
+    - gem build rpdoc.gemspec
     - bundle install
     - RPDOC_ENABLE=false rspec spec
   only:
