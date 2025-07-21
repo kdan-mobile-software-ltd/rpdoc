@@ -15,14 +15,11 @@ rspec:
   tags:
     - arm64
   script:
-    - bundle config set --local path 'vendor/bundle'
-    - RELEASE_VERSION=$(cat VERSION.md)
-    - gem build rpdoc.gemspec
-    - gem install rpdoc-$RELEASE_VERSION.gem --local
     - bundle install
     - RPDOC_ENABLE=false bundle exec rspec spec
-  only:
-    - master
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "master"
 
 to_gem:
   stage: publish
