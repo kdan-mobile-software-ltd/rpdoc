@@ -48,7 +48,7 @@ module Rpdoc
         code: @rspec_response.code.to_i,
         header: headers,
       }
-      if @rspec_response.headers['Content-Type'].include?('application/json')
+      if @rspec_response.headers['Content-Type']&.include?('application/json')
         data[:_postman_previewlanguage] = 'json'
         data[:body] = JSON.pretty_generate(JSON.parse(@rspec_response.body)) rescue nil
       else

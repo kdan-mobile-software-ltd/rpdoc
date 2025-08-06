@@ -1,3 +1,6 @@
+## [0.2.5] - 2025-08-06
+- Fix 204 No Content response handling without Content-Type header.
+
 ## [0.2.4] - 2025-07-16
 - Update gemspec.
 - Update CI to use Ruby 3.4.5.
