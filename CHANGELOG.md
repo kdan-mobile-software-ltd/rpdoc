@@ -1,6 +1,8 @@
 ## [0.2.6] - 2026-02-10
 - Update CI to use Ruby 3.4.8.
-- Update gemspec dependencies.
+- Update gemspec dependencies to avoid open-ended version constraints warnings.
+- Align `activesupport` and `railties` support range to `>= 7.1, < 9.0`.
+- Load gem version from `VERSION.md` in `lib/rpdoc/version.rb` to keep a single source of truth.
 
 ## [0.2.5] - 2025-08-06
 - Fix 204 No Content response handling without Content-Type header.
