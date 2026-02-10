@@ -11,7 +11,7 @@ stages:
 
 rspec:
   stage: rspec
-  image: ruby:3.4.5
+  image: ruby:3.4.8
   tags:
     - arm64
   script:
@@ -23,7 +23,7 @@ rspec:
 
 to_gem:
   stage: publish
-  image: ruby:3.4.5
+  image: ruby:3.4.8
   tags:
     - arm64
   script:
