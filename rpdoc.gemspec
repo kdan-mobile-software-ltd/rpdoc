@@ -27,11 +27,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activesupport", ">= 7.1"
-  spec.add_dependency "json_requester", ">= 2.0.1"
+  spec.add_runtime_dependency "activesupport", ">= 7.1", "< 9.0"
+  spec.add_runtime_dependency "json_requester", "~> 2.0", ">= 2.0.1"
 
-  spec.add_development_dependency "pry", ">= 0.14.1"
-  spec.add_development_dependency "railties", ">= 6.1.4"
-  spec.add_development_dependency "rspec", ">= 3.13"
-  spec.add_development_dependency "rubocop", ">= 1.78"
+  spec.add_development_dependency "pry", "~> 0.14", ">= 0.14.1"
+  spec.add_development_dependency "railties", ">= 7.1", "< 9.0"
+  spec.add_development_dependency "rspec", "~> 3.13"
+  spec.add_development_dependency "rubocop", "~> 1.78"
 end
