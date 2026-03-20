@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/railtie.rb
 require 'rpdoc'
 require 'rails'

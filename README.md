@@ -160,6 +160,10 @@ after(:each) do
 end
 ```
 
+## Security
+
+If you discover a security issue, please review the project's [Security Policy](SECURITY.md) for reporting instructions.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

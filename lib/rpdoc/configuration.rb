@@ -36,7 +36,7 @@ module Rpdoc
       @rpdoc_enable = ENV['RPDOC_ENABLE'] != 'false'
 
       @postman_host = 'https://api.getpostman.com'
-      @postman_collection_path = "/collections"
+      @postman_collection_path = '/collections'
       @postman_apikey = nil
 
       @collection_workspace = nil
@@ -62,7 +62,7 @@ module Rpdoc
       @rpdoc_auto_push = false
       @rpdoc_auto_push_strategy = :push_and_create
     end
-  
+
     def valid?
       return true unless @rpdoc_enable && @rpdoc_auto_push
       return false if @postman_apikey.nil?
@@ -70,6 +70,7 @@ module Rpdoc
       return false unless RPDOC_AUTO_PUSH_STRATEGIES.include?(@rpdoc_auto_push_strategy.to_sym)
       return false if @rpdoc_auto_push_strategy == :push_and_update && @collection_uid.nil?
       return false if @rpdoc_folder_ordering.present? && (RPDOC_FOLDER_ORDERING.exclude?(@rpdoc_folder_ordering) || !@rpdoc_folder_ordering.is_a?(Array))
+
       true
     end
   end

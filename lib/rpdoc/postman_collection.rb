@@ -13,8 +13,8 @@ module Rpdoc
       @requester = JsonRequester.new(@configuration.postman_host)
       @data = data&.deep_symbolize_keys || generated_collection_data
 
-      self.clean_empty_folders!
-      self.reordering!
+      clean_empty_folders!
+      reordering!
     end
 
     def push
@@ -44,9 +44,7 @@ module Rpdoc
 
     def save(path: nil)
       path ||= "#{@configuration.rpdoc_root}/#{@configuration.rpdoc_collection_filename}"
-      File.open(path, 'w+') do |f|
-        f.write(JSON.pretty_generate(@data))
-      end
+      File.write(path, JSON.pretty_generate(@data))
     end
 
     def merge!(other_collection)
@@ -84,18 +82,26 @@ module Rpdoc
     end
 
     def description(folder)
-      File.read("#{folder}/#{@configuration.rpdoc_description_filename}") rescue ""
+      File.read("#{folder}/#{@configuration.rpdoc_description_filename}")
+    rescue StandardError
+      ''
     end
 
     def items(folder)
       data = []
       Dir.glob("#{folder}/*") do |filename|
         next unless File.directory?(filename)
-        request_file = File.read("#{filename}/#{@configuration.rpdoc_request_filename}") rescue nil
+
+        request_file = begin
+          File.read("#{filename}/#{@configuration.rpdoc_request_filename}")
+        rescue StandardError
+          nil
+        end
         request_data = JSON.parse(request_file).deep_symbolize_keys if request_file.present?
         if request_data.present?
           Dir.glob("#{filename}/*") do |response_filename|
             next unless response_filename.match?(/.json$/) && response_filename != "#{filename}/#{@configuration.rpdoc_request_filename}"
+
             response_data = JSON.parse(File.read(response_filename)).deep_symbolize_keys
             request_data[:response] << response_data
           end
@@ -114,11 +120,11 @@ module Rpdoc
 
     def clean_generated_responses_from(collection_items)
       collection_items.each do |item|
-        if item.has_key?(:item)
+        if item.key?(:item)
           clean_generated_responses_from(item[:item])
-        elsif item.has_key?(:response)
+        elsif item.key?(:response)
           item[:response].reject! do |response|
-            @configuration.rspec_response_identifier.present? ? response.dig(:header)&.pluck(:key)&.include?('RSpec-Location') : true
+            @configuration.rspec_response_identifier.present? ? response[:header]&.pluck(:key)&.include?('RSpec-Location') : true
           end
         end
       end
@@ -139,11 +145,11 @@ module Rpdoc
         # insert generated responses and replace description into corresponding items based on item[:name]
         from_collection_items.each do |from_item|
           from_item_name = from_item[:name]
-          if item_hash.has_key?(from_item_name)
-            if from_item.has_key?(:item) && item_hash[from_item_name].has_key?(:item)
+          if item_hash.key?(from_item_name)
+            if from_item.key?(:item) && item_hash[from_item_name].key?(:item)
               item_hash[from_item_name][:description] = from_item[:description]
               insert_generated_responses_into(item_hash[from_item_name][:item], from_collection_items: from_item[:item].to_a)
-            elsif from_item.has_key?(:response) && item_hash[from_item_name].has_key?(:response)
+            elsif from_item.key?(:response) && item_hash[from_item_name].key?(:response)
               item_hash[from_item_name][:request] = from_item[:request].deep_dup
               item_hash[from_item_name][:response] += from_item[:response].deep_dup
             else
@@ -158,9 +164,11 @@ module Rpdoc
 
     def clean_empty_folders_from(collection_items)
       return unless @configuration.rpdoc_clean_empty_folders
+
       collection_items&.reject! do |item|
-        next false if item.has_key?(:request)
+        next false if item.key?(:request)
         next false if @configuration.rpdoc_clean_empty_folders_except.include?(item[:name])
+
         clean_empty_folders_from(item[:item]) if item[:item].present?
         item[:item].nil? || item[:item].empty?
       end
@@ -168,11 +176,13 @@ module Rpdoc
 
     def sort_folders_from(collection_items)
       return unless @configuration.rpdoc_folder_ordering.present?
-      if @configuration.rpdoc_folder_ordering == :asc
+
+      case @configuration.rpdoc_folder_ordering
+      when :asc
         collection_items&.sort_by! { |item| item[:name] }
-      elsif @configuration.rpdoc_folder_ordering == :desc
-        collection_items&.sort_by! { |item| item[:name] }.reverse!
-      elsif @configuration.rpdoc_folder_ordering.is_a?(Array)
+      when :desc
+        collection_items&.sort_by! { |item| item[:name] }&.reverse!
+      when Array
         # sort by array and then sort by asc
         collection_items&.sort_by! { |item| [@configuration.rpdoc_folder_ordering.index(item[:name]) || Float::INFINITY, item[:name]] }
       end

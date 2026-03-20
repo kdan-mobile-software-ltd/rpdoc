@@ -35,5 +35,5 @@ to_gem:
     - GEM_NAME=rpdoc-$RELEASE_VERSION.gem
     - gem build rpdoc.gemspec
     - gem push $GEM_NAME
-  only:
-    - /release-\d+\.\d+\.\d+(\.\d+)?/
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^release-\d+\.\d+\.\d+(\.\d+)?$/'

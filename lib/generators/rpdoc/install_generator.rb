@@ -9,7 +9,7 @@ module Rpdoc
       desc 'Creates an initializer file at config/initializers.'
 
       def copy_initializer_file
-        copy_file "initializer.rb", "#{Rails.root}/config/initializers/rpdoc.rb"
+        copy_file 'initializer.rb', "#{Rails.root}/config/initializers/rpdoc.rb"
       end
     end
   end

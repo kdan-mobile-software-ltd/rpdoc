@@ -1,3 +1,13 @@
+## [0.3.0] - 2026-03-20
+- Bump gem version to `0.3.0` and raise the required Ruby version to `>= 3.0.0`.
+- Add `SECURITY.md`, document the project's security policy, and link it from `README.md`.
+- Update the supported security maintenance policy to only cover the latest release line.
+- Move development dependencies from `rpdoc.gemspec` to `Gemfile` and refresh development tooling versions.
+- Update `json` to version `2.19.2` for `CVE-2026-33210` format string injection vulnerability mitigation.
+- Update `json_requester` to `2.0.5` and refresh locked dependency versions.
+- Adjust the GitLab release job to use `rules` for tag-based gem publishing.
+- Align RuboCop configuration with the current codebase and fix multiple lint and style issues across the gem implementation.
+
 ## [0.2.6] - 2026-02-10
 - Update CI to use Ruby 3.4.8.
 - Update gemspec dependencies to avoid open-ended version constraints warnings.
