@@ -1,5 +1,7 @@
 # Rpdoc
 
+[![Gem Version](https://badge.fury.io/rb/rpdoc.svg?icon=si%3Arubygems)](https://badge.fury.io/rb/rpdoc)
+
 `Rpdoc` is a simple `Postman` API documentation tool, which transforms RSpec examples to Postman collection (with json files in Postman data format stored locally).
 
 ### Benefits
