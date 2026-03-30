@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'json_requester'
-require 'active_support'
-require 'active_support/core_ext'
+require "json_requester"
+require "active_support"
+require "active_support/core_ext"
 
 module Rpdoc
   class PostmanCollection
@@ -24,7 +24,7 @@ module Rpdoc
     def push_and_create
       path = "#{@configuration.postman_collection_path}?workspace=#{@configuration.collection_workspace}"
       headers = {
-        'X-Api-Key': @configuration.postman_apikey
+        "X-Api-Key": @configuration.postman_apikey
       }
       @requester.http_send(:post, path, @data, headers)
     end
@@ -32,10 +32,10 @@ module Rpdoc
     def push_and_update
       path = "#{@configuration.postman_collection_path}/#{@configuration.collection_uid}"
       headers = {
-        'X-Api-Key': @configuration.postman_apikey
+        "X-Api-Key": @configuration.postman_apikey
       }
       remote_collection_data = @requester.http_send(:get, path, {}, headers)
-      remote_collection_data = remote_collection_data['status'] == 200 ? remote_collection_data.deep_symbolize_keys.slice(:collection) : nil
+      remote_collection_data = remote_collection_data["status"] == 200 ? remote_collection_data.deep_symbolize_keys.slice(:collection) : nil
       remote_collection = PostmanCollection.new(data: remote_collection_data)
       remote_collection.clean_generated_responses!
       remote_collection.merge!(self)
@@ -84,7 +84,7 @@ module Rpdoc
     def description(folder)
       File.read("#{folder}/#{@configuration.rpdoc_description_filename}")
     rescue StandardError
-      ''
+      ""
     end
 
     def items(folder)
@@ -109,7 +109,7 @@ module Rpdoc
           data << request_data
         else
           data << {
-            name: filename.split('/').last.camelize,
+            name: filename.split("/").last.camelize,
             description: description(filename),
             item: items(filename)
           }
@@ -124,7 +124,7 @@ module Rpdoc
           clean_generated_responses_from(item[:item])
         elsif item.key?(:response)
           item[:response].reject! do |response|
-            @configuration.rspec_response_identifier.present? ? response[:header]&.pluck(:key)&.include?('RSpec-Location') : true
+            @configuration.rspec_response_identifier.present? ? response[:header]&.pluck(:key)&.include?("RSpec-Location") : true
           end
         end
       end

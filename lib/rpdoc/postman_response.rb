@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'cgi'
+require "cgi"
 
 module Rpdoc
   class PostmanResponse
@@ -48,12 +48,12 @@ module Rpdoc
         code: @rspec_response.code.to_i,
         header: headers
       }
-      if @rspec_response.headers['Content-Type']&.include?('application/json')
-        data[:_postman_previewlanguage] = 'json'
+      if @rspec_response.headers["Content-Type"]&.include?("application/json")
+        data[:_postman_previewlanguage] = "json"
         data[:body] = pretty_json_or_nil(@rspec_response.body)
       else
         body = @rspec_response.body
-        data[:_postman_previewlanguage] = 'text'
+        data[:_postman_previewlanguage] = "text"
         data[:body] = utf8_body(body)
       end
       data
@@ -61,7 +61,7 @@ module Rpdoc
 
     def rspec_response_identifier_header
       {
-        key: 'RSpec-Location',
+        key: "RSpec-Location",
         value: @rspec_example.metadata[:location]
       }
     end
@@ -77,25 +77,25 @@ module Rpdoc
           value: @rspec_request.headers[header]
         }
       end.compact
-      query_string = @rspec_request.query_string.split('&').map do |string|
-        key, value = string.split('=')
+      query_string = @rspec_request.query_string.split("&").map do |string|
+        key, value = string.split("=")
         next if key.nil? || value.nil?
 
         {
           key: key,
           value: CGI.unescape(value),
-          text: 'text'
+          text: "text"
         }
       end.compact
 
-      original_path = @rspec_request.original_fullpath.split('?').first # use original_fullpath instead of path to avoid request being redirected
+      original_path = @rspec_request.original_fullpath.split("?").first # use original_fullpath instead of path to avoid request being redirected
       {
         method: @rspec_request.method,
         header: filter_headers,
         url: {
           raw: "#{@configuration.rspec_server_host}#{original_path}",
           host: [@configuration.rspec_server_host],
-          path: original_path.split('/'),
+          path: original_path.split("/"),
           query: query_string
         },
         body: original_request_data_body
@@ -103,20 +103,20 @@ module Rpdoc
     end
 
     def original_request_data_body
-      if @rspec_request.headers['RAW_POST_DATA'].present?
-        json_body = pretty_json_or_nil(@rspec_request.headers['RAW_POST_DATA'])
+      if @rspec_request.headers["RAW_POST_DATA"].present?
+        json_body = pretty_json_or_nil(@rspec_request.headers["RAW_POST_DATA"])
         {
-          mode: 'raw',
-          raw: json_body || @rspec_request.headers['RAW_POST_DATA'],
+          mode: "raw",
+          raw: json_body || @rspec_request.headers["RAW_POST_DATA"],
           options: {
             raw: {
-              language: json_body.present? ? 'json' : 'text'
+              language: json_body.present? ? "json" : "text"
             }
           }
         }
       elsif @rspec_request.form_data?
         {
-          mode: 'formdata',
+          mode: "formdata",
           formdata: form_data_object_to_array(@rspec_request.request_parameters)
         }
       end
@@ -151,13 +151,13 @@ module Rpdoc
           array << {
             key: key,
             src: value.original_filename,
-            type: 'file'
+            type: "file"
           }
         else
           array << {
             key: key,
             value: value,
-            type: 'text'
+            type: "text"
           }
         end
       end

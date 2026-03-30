@@ -33,27 +33,27 @@ module Rpdoc
     RPDOC_AUTO_PUSH_STRATEGIES = [:push_and_create, :push_and_update].freeze
 
     def initialize
-      @rpdoc_enable = ENV['RPDOC_ENABLE'] != 'false'
+      @rpdoc_enable = ENV["RPDOC_ENABLE"] != "false"
 
-      @postman_host = 'https://api.getpostman.com'
-      @postman_collection_path = '/collections'
+      @postman_host = "https://api.getpostman.com"
+      @postman_collection_path = "/collections"
       @postman_apikey = nil
 
       @collection_workspace = nil
       @collection_uid = nil
-      @collection_name = 'Rpdoc'
-      @collection_schema = 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
+      @collection_name = "Rpdoc"
+      @collection_schema = "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 
-      @rspec_root = 'spec'
-      @rspec_server_host = '{{server_host}}'
-      @rspec_request_allow_headers = ['User-Agent', 'Content-Type', 'Authorization']
-      @rspec_response_allow_headers = ['Content-Type', 'Content-Length', 'Location']
+      @rspec_root = "spec"
+      @rspec_server_host = "{{server_host}}"
+      @rspec_request_allow_headers = ["User-Agent", "Content-Type", "Authorization"]
+      @rspec_response_allow_headers = ["Content-Type", "Content-Length", "Location"]
       @rspec_response_identifier = :rspec_location
 
-      @rpdoc_root = 'rpdoc'
-      @rpdoc_request_filename = 'request.json'
-      @rpdoc_description_filename = 'description.md'
-      @rpdoc_collection_filename = 'collection.json'
+      @rpdoc_root = "rpdoc"
+      @rpdoc_request_filename = "request.json"
+      @rpdoc_description_filename = "description.md"
+      @rpdoc_collection_filename = "collection.json"
 
       @rpdoc_clean_empty_folders = true
       @rpdoc_clean_empty_folders_except = []

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'rpdoc/version'
-require 'rpdoc/configuration'
-require 'rpdoc/postman_response'
-require 'rpdoc/postman_collection'
-require 'rpdoc/helper' if defined?(RSpec)
-require 'rpdoc/railtie' if defined?(Rails)
+require "rpdoc/version"
+require "rpdoc/configuration"
+require "rpdoc/postman_response"
+require "rpdoc/postman_collection"
+require "rpdoc/helper" if defined?(RSpec)
+require "rpdoc/railtie" if defined?(Rails)
 
 module Rpdoc
   class << self

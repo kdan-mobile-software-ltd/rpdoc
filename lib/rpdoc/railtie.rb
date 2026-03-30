@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # lib/railtie.rb
-require 'rpdoc'
-require 'rails'
+require "rpdoc"
+require "rails"
 
 module Rpdoc
   class Railtie < Rails::Railtie

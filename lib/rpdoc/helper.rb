@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'rspec/rails' if defined?(RSpec::Rails)
+require "rspec/rails" if defined?(RSpec::Rails)
 
 RSpec.configure do |config|
   config.before(:suite) do
     root = Rpdoc.configuration.rpdoc_root
     if Rpdoc.configuration.rpdoc_enable
-      raise StandardError, 'Configuration Invalid' unless Rpdoc.configuration.valid?
+      raise StandardError, "Configuration Invalid" unless Rpdoc.configuration.valid?
 
       FileUtils.mkdir_p(root)
       Dir.glob("#{root}/**/*.json") do |filename|
@@ -24,7 +24,7 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.shared_context 'rpdoc' do
+RSpec.shared_context "rpdoc" do
   after(:each) do |example|
     example.metadata[:rpdoc_skip] ||= false
 
@@ -38,7 +38,7 @@ RSpec.shared_context 'rpdoc' do
       example.metadata[:rpdoc_action_name] ||= controller.action_name
       example.metadata[:rpdoc_example_key] ||= example.metadata[:description].underscore
       example.metadata[:rpdoc_example_name] ||= example.metadata[:description]
-      example.metadata[:rpdoc_example_folders] ||= controller.class.controller_path.split('/')
+      example.metadata[:rpdoc_example_folders] ||= controller.class.controller_path.split("/")
 
       postman_response = Rpdoc::PostmanResponse.new(example, request, response)
       postman_response.save

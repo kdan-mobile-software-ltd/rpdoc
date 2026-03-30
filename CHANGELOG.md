@@ -4,7 +4,7 @@
 - Update the supported security maintenance policy to only cover the latest release line.
 - Move development dependencies from `rpdoc.gemspec` to `Gemfile` and refresh development tooling versions.
 - Update `json` to version `2.19.2` for `CVE-2026-33210` format string injection vulnerability mitigation.
-- Update `json_requester` to `2.0.5` and refresh locked dependency versions.
+- Update `json_requester` to `2.0.7` and refresh locked dependency versions.
 - Adjust the GitLab release job to use `rules` for tag-based gem publishing.
 - Align RuboCop configuration with the current codebase and fix multiple lint and style issues across the gem implementation.
 
