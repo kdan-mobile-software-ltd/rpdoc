@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rpdoc'
+require "rpdoc"
 
 namespace :rpdoc do
-  desc 'push collection to the Postman server'
+  desc "push collection to the Postman server"
   task :push do
     postman_collection = Rpdoc::PostmanCollection.new
     postman_collection.save

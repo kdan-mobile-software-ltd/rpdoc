@@ -6,8 +6,21 @@ include:
 stages:
   - test
   - sast_upload
+  - lint
   - rspec
   - publish
+
+rubocop:
+  stage: lint
+  image: ruby:3.4.8
+  tags:
+    - arm64
+  script:
+    - bundle install
+    - bundle exec rubocop
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "master"
 
 rspec:
   stage: rspec
@@ -35,5 +48,5 @@ to_gem:
     - GEM_NAME=rpdoc-$RELEASE_VERSION.gem
     - gem build rpdoc.gemspec
     - gem push $GEM_NAME
-  only:
-    - /release-\d+\.\d+\.\d+(\.\d+)?/
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^release-\d+\.\d+\.\d+(\.\d+)?$/'

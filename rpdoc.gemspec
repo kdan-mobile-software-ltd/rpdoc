@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Rpdoc is a simple Postman API documentation tool, which transforms RSpec examples to Postman collection."
   spec.homepage      = "https://github.com/kdan-mobile-software-ltd/rpdoc"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.0.0")
   spec.metadata = {
     "source_code_uri" => "https://github.com/kdan-mobile-software-ltd/rpdoc",
     "changelog_uri" => "https://github.com/kdan-mobile-software-ltd/rpdoc/blob/master/CHANGELOG.md"
@@ -27,11 +27,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "activesupport", ">= 7.1", "< 9.0"
-  spec.add_runtime_dependency "json_requester", "~> 2.0", ">= 2.0.1"
-
-  spec.add_development_dependency "pry", "~> 0.14", ">= 0.14.1"
-  spec.add_development_dependency "railties", ">= 7.1", "< 9.0"
-  spec.add_development_dependency "rspec", "~> 3.13"
-  spec.add_development_dependency "rubocop", "~> 1.78"
+  spec.add_dependency "activesupport", ">= 7.1", "< 9.0"
+  spec.add_dependency "json_requester", "~> 2.0", ">= 2.0.1"
 end
