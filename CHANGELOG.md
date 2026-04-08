@@ -1,6 +1,7 @@
 ## [0.3.1] - 2026-04-08
 - Update `rack-session` to `2.1.2` to address the latest critical session security advisory.
 - Update `rack` to `3.2.6` to pick up the latest Rack security fixes from Dependabot alerts.
+- Update `addressable` to `2.9.0` to fix Regular Expression Denial of Service in Addressable templates.
 - Remove `VERSION.md` and keep gem versioning on `lib/rpdoc/version.rb` for gem build and release flows.
 
 ## [0.3.0] - 2026-03-20
