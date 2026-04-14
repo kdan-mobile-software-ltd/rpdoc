@@ -1,3 +1,7 @@
+## [0.3.2] - 2026-04-14
+- Update required Ruby version to `>= 3.2.0` in `rpdoc.gemspec` and `.rubocop.yml` to align with the latest security and performance requirements.
+- activesupport to `8.1.3` to address the latest security and performance requirements.
+
 ## [0.3.1] - 2026-04-08
 - Update `rack-session` to `2.1.2` to address the latest critical session security advisory.
 - Update `rack` to `3.2.6` to pick up the latest Rack security fixes from Dependabot alerts.

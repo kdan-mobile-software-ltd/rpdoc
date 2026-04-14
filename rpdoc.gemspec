@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Rpdoc is a simple Postman API documentation tool, which transforms RSpec examples to Postman collection."
   spec.homepage      = "https://github.com/kdan-mobile-software-ltd/rpdoc"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 3.0.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.2.0")
   spec.metadata = {
     "source_code_uri" => "https://github.com/kdan-mobile-software-ltd/rpdoc",
     "changelog_uri" => "https://github.com/kdan-mobile-software-ltd/rpdoc/blob/master/CHANGELOG.md",
