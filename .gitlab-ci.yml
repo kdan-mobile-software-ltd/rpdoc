@@ -44,7 +44,7 @@ to_gem:
     - touch ~/.gem/credentials
     - chmod 0600 ~/.gem/credentials
     - 'printf -- "---\n:rubygems_api_key: $GEM_HOST_API_KEY\n" > ~/.gem/credentials'
-    - RELEASE_VERSION=$(cat VERSION.md)
+    - RELEASE_VERSION=$(ruby -e 'require_relative "./lib/rpdoc/version"; puts Rpdoc::VERSION')
     - GEM_NAME=rpdoc-$RELEASE_VERSION.gem
     - gem build rpdoc.gemspec
     - gem push $GEM_NAME

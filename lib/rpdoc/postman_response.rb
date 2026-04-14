@@ -137,31 +137,46 @@ module Rpdoc
     end
 
     def form_data_object_to_array(form_data, prefix: nil)
-      array = []
-      form_data.each do |key, value|
-        key = "#{prefix}[#{key}]" if prefix.present?
-        case value
-        when Hash
-          array += form_data_object_to_array(value, prefix: key)
-        when Array
-          value.each do |item|
-            array += form_data_object_to_array(item, prefix: "#{key}[]")
-          end
-        when ActionDispatch::Http::UploadedFile
-          array << {
-            key: key,
-            src: value.original_filename,
-            type: "file"
-          }
-        else
-          array << {
-            key: key,
-            value: value,
-            type: "text"
-          }
+      case form_data
+      when Hash
+        form_data.flat_map do |key, value|
+          nested_key = prefix.present? ? "#{prefix}[#{key}]" : key.to_s
+          form_data_object_to_array(value, prefix: nested_key)
         end
+      when Array
+        form_data.flat_map do |item|
+          form_data_object_to_array(item, prefix: "#{prefix}[]")
+        end
+      else
+        [build_form_data_entry(prefix, form_data)]
       end
-      array
+    end
+
+    def build_form_data_entry(key, value)
+      return build_file_form_data_entry(key, value) if uploaded_file?(value)
+
+      build_text_form_data_entry(key, value)
+    end
+
+    def uploaded_file?(value)
+      value.is_a?(ActionDispatch::Http::UploadedFile) ||
+        (defined?(Rack::Test::UploadedFile) && value.is_a?(Rack::Test::UploadedFile))
+    end
+
+    def build_file_form_data_entry(key, file)
+      {
+        key: key,
+        src: file.original_filename,
+        type: "file"
+      }
+    end
+
+    def build_text_form_data_entry(key, value)
+      {
+        key: key,
+        value: value,
+        type: "text"
+      }
     end
   end
 end

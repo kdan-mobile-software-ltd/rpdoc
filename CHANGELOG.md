@@ -1,3 +1,12 @@
+## [0.3.1] - 2026-04-08
+- Update `rack-session` to `2.1.2` to address the latest critical session security advisory.
+- Update `rack` to `3.2.6` to pick up the latest Rack security fixes from Dependabot alerts.
+- Update `addressable` to `2.9.0` to fix Regular Expression Denial of Service in Addressable templates.
+- Remove `VERSION.md` and keep gem versioning on `lib/rpdoc/version.rb` for gem build and release flows.
+- Fix multipart form-data serialization for file array params in `Rpdoc::PostmanResponse`.
+- Add support for both `ActionDispatch::Http::UploadedFile` and `Rack::Test::UploadedFile` in array and nested hash structures.
+- Preserve existing text field output format for nested Hash and Array form-data entries.
+
 ## [0.3.0] - 2026-03-20
 - Bump gem version to `0.3.0` and raise the required Ruby version to `>= 3.0.0`.
 - Add `SECURITY.md`, document the project's security policy, and link it from `README.md`.

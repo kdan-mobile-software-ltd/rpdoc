@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rpdoc (0.3.0)
+    rpdoc (0.3.1)
       activesupport (>= 7.1, < 9.0)
       json_requester (~> 2.0, >= 2.0.1)
 
@@ -37,7 +37,7 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    addressable (2.8.9)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     base64 (0.3.0)
@@ -123,8 +123,8 @@ GEM
       stringio
     public_suffix (7.0.5)
     racc (1.8.1)
-    rack (3.2.5)
-    rack-session (2.1.1)
+    rack (3.2.6)
+    rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
     rack-test (2.2.0)

@@ -2,10 +2,6 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.0
 
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: single_quotes
-
 Style/StringLiteralsInInterpolation:
   Enabled: false
 
@@ -46,6 +42,3 @@ Metrics/BlockLength:
 
 Metrics/ParameterLists:
   Max: 10
-
-Gemspec/RequireMFA:
-  Enabled: false
