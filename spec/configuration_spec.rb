@@ -3,6 +3,15 @@
 require "rpdoc"
 
 describe Rpdoc::Configuration do
+  around do |example|
+    original_configuration = Rpdoc.configuration
+    Rpdoc.instance_variable_set(:@configuration, Rpdoc::Configuration.new)
+
+    example.run
+  ensure
+    Rpdoc.instance_variable_set(:@configuration, original_configuration)
+  end
+
   it "should be configurable" do
     Rpdoc.configure do |config|
       config.postman_apikey = "postman_apikey"
