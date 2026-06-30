@@ -1,3 +1,8 @@
+## [0.3.3] - 2026-06-16
+- Update `nokogiri` to `1.19.3` to address GHSA-c4rq-3m3g-8wgx.
+- Update `erb` to `6.0.4` to address CVE-2026-41316 ERB template injection advisory.
+- Regenerate `Gemfile.lock` so the gem PATH spec tracks `0.3.3`.
+
 ## [0.3.2] - 2026-04-14
 - Update required Ruby version to `>= 3.2.0` in `rpdoc.gemspec` and `.rubocop.yml` to align with the latest security and performance requirements.
 - activesupport to `8.1.3` to address the latest security and performance requirements.
