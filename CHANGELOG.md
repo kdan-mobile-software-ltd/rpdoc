@@ -1,3 +1,7 @@
+## [0.3.4] - 2026-06-30
+- Update `concurrent-ruby` to `1.3.7` to address CVE-2026-54906 (ReadWriteLock unauthorized lock release, CRITICAL) and CVE-2026-54904 (AtomicReference#update infinite loop, HIGH).
+- Update `faraday` to `2.14.3` to address CVE-2026-54297 (NestedParamsEncoder unbounded recursion DoS, HIGH).
+
 ## [0.3.3] - 2026-06-16
 - Update `nokogiri` to `1.19.3` to address GHSA-c4rq-3m3g-8wgx.
 - Update `erb` to `6.0.4` to address CVE-2026-41316 ERB template injection advisory.
